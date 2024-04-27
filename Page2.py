@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
-class App(tk.Tk):
+""" class App(tk.Tk):
     def __init__(self, title, size):
         super().__init__()
         
@@ -12,10 +12,10 @@ class App(tk.Tk):
         Page2_size = (size[0], size[1])
         Page2(self, Page2_size).pack()
 
-        self.mainloop()
+        self.mainloop() """
 
 class Page2(tk.Frame):
-    def __init__(self, parent, size):
+    def __init__(self, parent, size, b_next, b_back):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
         # Define grid
@@ -35,7 +35,7 @@ class Page2(tk.Frame):
         self.input_frame.grid(row = 1, column = 0, sticky='we', columnspan=3)
 
         # Button Frame
-        self.back_frame = Button(self)
+        self.back_frame = Button(self, b_next, b_back)
         self.back_frame.grid(row = 2, column = 0, sticky='w', columnspan=3)
 
 class Title(tk.Frame):
@@ -82,15 +82,13 @@ class Output(tk.LabelFrame):
         self.text_voltage.grid(row = 3, column = 2, sticky = 'w', padx = 10, pady = 5)
 
 class Button(tk.Frame):
-    def Back():
-        back = 1
-    def __init__(self, parent):
+    def __init__(self, parent, b_next, b_back):
         super().__init__(parent)
 
-        self.button_sim = tk.Button(self, text='Simulation', command=self.Back)
-        self.button_back = tk.Button(self, text='Back', command=self.Back)
+        self.button_sim = tk.Button(self, text='Simulation', command = b_next)
+        self.button_back = tk.Button(self, text='Back', command = b_back)
         self.button_sim.pack(side='right', padx=5, pady=5)
         self.button_back.pack(side='right', padx=5, pady=5)
 
-# Create and run the app
-app = App('Simulation', (850, 600))
+""" # Create and run the app
+app = App('Simulation', (850, 600)) """

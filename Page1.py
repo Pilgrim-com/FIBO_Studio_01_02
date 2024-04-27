@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
-class App(tk.Tk):
+""" class Page(tk.Tk):
     def __init__(self, title, size):
         super().__init__()
         
@@ -12,10 +12,10 @@ class App(tk.Tk):
         Page1_size = (size[0], size[1])
         Page1(self, Page1_size).pack()
 
-        self.mainloop()
+        self.mainloop() """
 
 class Page1(tk.Frame):
-    def __init__(self, parent, size):
+    def __init__(self, parent, size, b_next):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
         # Define grid
@@ -39,7 +39,7 @@ class Page1(tk.Frame):
         self.input_frame.grid(row = 1, column = 2, sticky='we')
 
         # Back
-        self.back_frame = Button(self)
+        self.back_frame = Button(self, b_next)
         self.back_frame.grid(row = 2, column = 0, sticky='news', columnspan=3)
 
 class Title(tk.Frame):
@@ -101,14 +101,11 @@ class Input(tk.LabelFrame):
         self.Add_button.grid(row=4, column=0, padx=(0, 10), pady=(0, 5), sticky="e")
 
 class Button(tk.Frame):
-    def Back():
-        back = 1
-
-    def __init__(self, parent):
+    def __init__(self, parent, b_next):
         super().__init__(parent)
 
-        self.button = tk.Button(self, text='Back', command=self.Back)
+        self.button = tk.Button(self, text='Next', command = b_next)
         self.button.pack(side = 'right')
 
-# Create and run the app
-app = App('Simulation', (850, 600))
+""" # Create and run the app
+app = App('Simulation', (850, 600)) """

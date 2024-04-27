@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
-class App(tk.Tk):
+""" class App(tk.Tk):
     def __init__(self, title, size):
         super().__init__()
         
@@ -12,12 +12,13 @@ class App(tk.Tk):
         Page3_size = (size[0], size[1])
         Page3(self, Page3_size).pack()
 
-        self.mainloop()
+        self.mainloop() """
 
 class Page3(tk.Frame):
-    def __init__(self, parent, size):
+    def __init__(self, parent, size, b_back):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
+
         # Define grid
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
@@ -30,13 +31,9 @@ class Page3(tk.Frame):
         self.text_frame = Title(self)
         self.text_frame.grid(row = 0, column = 0, sticky='n', columnspan=3)
 
-        # Onput Frame
-        self.input_frame = Output(self)
-        self.input_frame.grid(row = 1, column = 0, sticky='we', columnspan=3)
-
         # Button Frame
-        self.back_frame = Button(self)
-        self.back_frame.grid(row = 2, column = 0, sticky='w', columnspan=3)
+        self.back_frame = Button(self, b_back)
+        self.back_frame.grid(row = 2, column = 0, sticky='s', columnspan=3)
 
 class Title(tk.Frame):
     def __init__(self, parent):
@@ -54,15 +51,18 @@ class Simulation(tk.LabelFrame):
         super().__init__(parent)
 
 class Button(tk.Frame):
-    def Back():
-        back = 1
-    def __init__(self, parent):
+    def __init__(self, parent, b_back):
         super().__init__(parent)
 
-        self.button_sim = tk.Button(self, text='Simulation', command=self.Back)
-        self.button_back = tk.Button(self, text='Back', command=self.Back)
+        # Button
+        self.button_sim = tk.Button(self, text='Simulation', command = Simulation)
+        self.button_restart = tk.Button(self, text='Restart')
+        self.button_back = tk.Button(self, text='Back', command = b_back)
+
+        # Layout
         self.button_sim.pack(side='right', padx=5, pady=5)
+        self.button_restart.pack(side='right', padx=5, pady=5)
         self.button_back.pack(side='right', padx=5, pady=5)
 
-# Create and run the app
-app = App('Simulation', (850, 600))
+""" # Create and run the app
+app = App('Simulation', (850, 600)) """
