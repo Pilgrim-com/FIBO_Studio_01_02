@@ -9,12 +9,12 @@ class App(tk.Tk):
         self.geometry(f'{size[0]}x{size[1]}')
         self.minsize(size[0], size[1])
 
-        Page1_size = (size[0], size[1])
-        Page1(self, Page1_size).pack()
+        Page2_size = (size[0], size[1])
+        Page2(self, Page2_size).pack()
 
         self.mainloop()
 
-class Page1(tk.Frame):
+class Page2(tk.Frame):
     def __init__(self, parent, size):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])

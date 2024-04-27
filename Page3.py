@@ -9,12 +9,12 @@ class App(tk.Tk):
         self.geometry(f'{size[0]}x{size[1]}')
         self.minsize(size[0], size[1])
 
-        Page1_size = (size[0], size[1])
-        Page1(self, Page1_size).pack()
+        Page3_size = (size[0], size[1])
+        Page3(self, Page3_size).pack()
 
         self.mainloop()
 
-class Page1(tk.Frame):
+class Page3(tk.Frame):
     def __init__(self, parent, size):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
@@ -41,45 +41,17 @@ class Page1(tk.Frame):
 class Title(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
-        self.label = tk.Label(self, text="Result", font="Inter 32 bold")
+        self.label = tk.Label(self, text=" Simulation ", font="Inter 32 bold")
         self.label.pack()
         #self.label.place(relx=0.5, rely=0.03, anchor='center')
 
-class Output(tk.LabelFrame):
+class Calculate():
     def __init__(self, parent):
         super().__init__(parent)
 
-        #Label
-        self.label_x = tk.Label(self, text="Position x (mm)", font="Inter 16")
-        self.label_y = tk.Label(self, text="Position y (mm)", font="Inter 16")
-        self.label_rpm = tk.Label(self, text="RPM", font="Inter 16")
-        self.label_voltage = tk.Label(self, text="Moter Voltage", font="Inter 16")
-
-        #Text box
-        self.text_x = tk.Text(self, width = 20, height = 2)
-        self.text_y = tk.Text(self, width = 20, height = 2)
-        self.text_rpm = tk.Text(self, width = 20, height = 2)
-        self.text_voltage = tk.Text(self, width = 20, height = 2)
-
-        #Insert text to text box
-        self.text_x.insert('1.0', "Position x")
-        self.text_y.insert('1.0', "Position y")
-        self.text_rpm.insert('1.0', "1242 rpm")
-        self.text_voltage.insert('1.0', "2.71 V")
-
-        #State edit
-        self.text_x.config(state = 'disabled')
-        self.text_y.config(state = 'disabled')
-
-        #Layout
-        self.label_x.grid(row = 0, column = 0, sticky = 'w', padx = 10)
-        self.label_rpm.grid(row = 0, column = 2, sticky = 'w', padx = 10)
-        self.text_x.grid(row = 1, column = 0, sticky = 'w', padx = 10, pady = 5)
-        self.text_rpm.grid(row = 1, column = 2, sticky = 'w', padx = 10, pady = 5)
-        self.label_y.grid(row = 2, column = 0, sticky = 'w', padx = 10)
-        self.label_voltage.grid(row = 2, column = 2, sticky = 'w', padx = 10)
-        self.text_y.grid(row = 3, column = 0, sticky = 'w', padx = 10, pady = 5)
-        self.text_voltage.grid(row = 3, column = 2, sticky = 'w', padx = 10, pady = 5)
+class Simulation(tk.LabelFrame):
+    def __init__(self, parent):
+        super().__init__(parent)
 
 class Button(tk.Frame):
     def Back():
