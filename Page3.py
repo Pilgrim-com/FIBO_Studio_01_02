@@ -42,10 +42,6 @@ class Title(tk.Frame):
         self.label.pack()
         #self.label.place(relx=0.5, rely=0.03, anchor='center')
 
-class Calculate():
-    def __init__(self, parent):
-        super().__init__(parent)
-
 class Simulation(tk.LabelFrame):
     def __init__(self, parent):
         super().__init__(parent)

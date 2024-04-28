@@ -18,6 +18,7 @@ class Page1(tk.Frame):
     def __init__(self, parent, size, b_next):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
+
         # Define grid
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
@@ -73,15 +74,31 @@ class Canvas(tk.Frame):
         self.draw_triangle(self.canvas)
 
 class Input(tk.LabelFrame):
-    def Position(self):
-        position_x = self.box1.get()
-        print(position_x)
-        position_y = self.box2.get()
-        print(position_y)
+    def Calculate(self, variable):
+        self.Velocity(variable)
+        self.RPM(variable)
+        self.Moter_voltage(variable)
+
+    def Position(self, variable):
+        variable[0] = self.entry_x.get()
+        variable[1] = self.entry_x.get()
+
+    def Velocity(self, variable):
+        variable[0] = variable[0] * 2
+        variable[1] = variable[1] * 2
+
+    def RPM(self, variable):
+        variable[2] = (variable[0] * variable[1]) / 2
+
+    def Moter_voltage(self, variable):
+        variable[3] = variable[2] * 2
 
     def __init__(self, parent):
         super().__init__(parent, text = ' Position ')
         
+        # Declare variables
+        self.variable = [0, 0, 0, 0]
+
         # Create label and text box widgets
         self.label_x = tk.Label(self, text=" Posiotion x : ")
         self.label_y = tk.Label(self, text=" Posiotion y : ")
@@ -91,7 +108,7 @@ class Input(tk.LabelFrame):
         self.entry_y = tk.Entry(self)
 
         #Button
-        self.Add_button = tk.Button(self, text="Add position", command=self.Position)
+        self.Add_button = tk.Button(self, text="Add position", command=self.Calculate(self.variable))
         
         # Place label, text box, entry, button, and another text widgets using grid layout
         self.label_x.grid(row=0, column=0, sticky="w", padx=(10, 5), pady=(10, 5))

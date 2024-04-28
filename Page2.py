@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from Page1 import Input
 
 """ class App(tk.Tk):
     def __init__(self, title, size):
@@ -13,9 +14,8 @@ from tkinter import *
         Page2(self, Page2_size).pack()
 
         self.mainloop() """
-
 class Page2(tk.Frame):
-    def __init__(self, parent, size, b_next, b_back):
+    def __init__(self, parent, size, b_next, b_back, page1):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
         # Define grid
@@ -61,11 +61,13 @@ class Output(tk.LabelFrame):
         self.text_rpm = tk.Text(self, width = 20, height = 2)
         self.text_voltage = tk.Text(self, width = 20, height = 2)
 
+        #Declare variable
+        page1 = Input(self)
         #Insert text to text box
-        self.text_x.insert('1.0', "Position x")
-        self.text_y.insert('1.0', "Position y")
-        self.text_rpm.insert('1.0', "1242 rpm")
-        self.text_voltage.insert('1.0', "2.71 V")
+        self.text_x.insert('1.0', page1.variable[0])
+        self.text_y.insert('1.0', page1.variable[1])
+        self.text_rpm.insert('1.0', page1.variable[2])
+        self.text_voltage.insert('1.0', page1.variable[3])
 
         #State edit
         self.text_x.config(state = 'disabled')
