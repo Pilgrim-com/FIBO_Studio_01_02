@@ -3,11 +3,11 @@ from tkinter import *
 
 class Variable:
     def __init__(self):
-        self.position_x = 0
-        self.position_y = 0
-        self.velocity_start = 0
-        self.rpm = 0
-        self.voltage = 0
+        self.position_x = '0'
+        self.position_y = '0'
+        self.velocity_start = '0'
+        self.rpm = '0'
+        self.voltage = '0'
 
 class Page1(tk.Frame):
     def __init__(self, parent, size, b_next):
@@ -70,7 +70,7 @@ class Canvas(tk.Frame):
 
 class Input(tk.LabelFrame):
     def Calculate(self):
-        variable = Variable(self)
+        variable = Variable()
         self.Position(variable)
         self.Velocity(variable)
         self.RPM(variable)
@@ -82,15 +82,15 @@ class Input(tk.LabelFrame):
         print(variable.position_x, variable.position_y)
 
     def Velocity(self, variable):
-        variable.velocity_start = variable.position_x * variable.position_y
+        variable.velocity_start = int(variable.position_x) * int(variable.position_y)
         print(variable.velocity_start)
 
     def RPM(self, variable):
-        variable.rpm = variable.velocity_start * 2
+        variable.rpm = int(variable.velocity_start) * 2
         print(variable.rpm)
 
     def Moter_voltage(self, variable):
-        variable.voltage = variable.rpm * 2
+        variable.voltage = int(variable.rpm) * 2
         print(variable.voltage)
 
     def __init__(self, parent):
