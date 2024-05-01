@@ -1,18 +1,6 @@
 import tkinter as tk
 from tkinter import *
-
-""" class App(tk.Tk):
-    def __init__(self, title, size):
-        super().__init__()
-        
-        self.title(title)
-        self.geometry(f'{size[0]}x{size[1]}')
-        self.minsize(size[0], size[1])
-
-        Page3_size = (size[0], size[1])
-        Page3(self, Page3_size).pack()
-
-        self.mainloop() """
+from Page1 import Variable
 
 class Page3(tk.Frame):
     def __init__(self, parent, size, b_back):
@@ -30,7 +18,8 @@ class Page3(tk.Frame):
         # Text Frame
         self.text_frame = Title(self)
         self.text_frame.grid(row = 0, column = 0, sticky='n', columnspan=3)
-
+        # Simulation
+        
         # Button Frame
         self.back_frame = Button(self, b_back)
         self.back_frame.grid(row = 2, column = 0, sticky='s', columnspan=3)
@@ -45,6 +34,7 @@ class Title(tk.Frame):
 class Simulation(tk.LabelFrame):
     def __init__(self, parent):
         super().__init__(parent)
+        variable = Variable()
 
 class Button(tk.Frame):
     def __init__(self, parent, b_back):
@@ -59,6 +49,3 @@ class Button(tk.Frame):
         self.button_sim.pack(side='right', padx=5, pady=5)
         self.button_restart.pack(side='right', padx=5, pady=5)
         self.button_back.pack(side='right', padx=5, pady=5)
-
-""" # Create and run the app
-app = App('Simulation', (850, 600)) """

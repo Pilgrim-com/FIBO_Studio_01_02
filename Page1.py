@@ -1,18 +1,13 @@
 import tkinter as tk
 from tkinter import *
 
-""" class Page(tk.Tk):
-    def __init__(self, title, size):
-        super().__init__()
-        
-        self.title(title)
-        self.geometry(f'{size[0]}x{size[1]}')
-        self.minsize(size[0], size[1])
-
-        Page1_size = (size[0], size[1])
-        Page1(self, Page1_size).pack()
-
-        self.mainloop() """
+class Variable:
+    def __init__(self):
+        self.position_x = 0
+        self.position_y = 0
+        self.velocity_start = 0
+        self.rpm = 0
+        self.voltage = 0
 
 class Page1(tk.Frame):
     def __init__(self, parent, size, b_next):
@@ -74,30 +69,32 @@ class Canvas(tk.Frame):
         self.draw_triangle(self.canvas)
 
 class Input(tk.LabelFrame):
-    def Calculate(self, variable):
+    def Calculate(self):
+        variable = Variable(self)
+        self.Position(variable)
         self.Velocity(variable)
         self.RPM(variable)
         self.Moter_voltage(variable)
 
     def Position(self, variable):
-        variable[0] = self.entry_x.get()
-        variable[1] = self.entry_x.get()
+        variable.position_x = self.entry_x.get()
+        variable.position_y = self.entry_y.get()
+        print(variable.position_x, variable.position_y)
 
     def Velocity(self, variable):
-        variable[0] = variable[0] * 2
-        variable[1] = variable[1] * 2
+        variable.velocity_start = variable.position_x * variable.position_y
+        print(variable.velocity_start)
 
     def RPM(self, variable):
-        variable[2] = (variable[0] * variable[1]) / 2
+        variable.rpm = variable.velocity_start * 2
+        print(variable.rpm)
 
     def Moter_voltage(self, variable):
-        variable[3] = variable[2] * 2
+        variable.voltage = variable.rpm * 2
+        print(variable.voltage)
 
     def __init__(self, parent):
         super().__init__(parent, text = ' Position ')
-        
-        # Declare variables
-        self.variable = [0, 0, 0, 0]
 
         # Create label and text box widgets
         self.label_x = tk.Label(self, text=" Posiotion x : ")
@@ -108,7 +105,7 @@ class Input(tk.LabelFrame):
         self.entry_y = tk.Entry(self)
 
         #Button
-        self.Add_button = tk.Button(self, text="Add position", command=self.Calculate(self.variable))
+        self.Add_button = tk.Button(self, text="Add position", command=self.Calculate)
         
         # Place label, text box, entry, button, and another text widgets using grid layout
         self.label_x.grid(row=0, column=0, sticky="w", padx=(10, 5), pady=(10, 5))
@@ -123,6 +120,3 @@ class Button(tk.Frame):
 
         self.button = tk.Button(self, text='Next', command = b_next)
         self.button.pack(side = 'right')
-
-""" # Create and run the app
-app = App('Simulation', (850, 600)) """

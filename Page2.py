@@ -1,21 +1,9 @@
 import tkinter as tk
 from tkinter import *
-from Page1 import Input
+from Page1 import Variable
 
-""" class App(tk.Tk):
-    def __init__(self, title, size):
-        super().__init__()
-        
-        self.title(title)
-        self.geometry(f'{size[0]}x{size[1]}')
-        self.minsize(size[0], size[1])
-
-        Page2_size = (size[0], size[1])
-        Page2(self, Page2_size).pack()
-
-        self.mainloop() """
 class Page2(tk.Frame):
-    def __init__(self, parent, size, b_next, b_back, page1):
+    def __init__(self, parent, size, b_next, b_back):
         super().__init__(parent)
         self.config(width = size[0], height = size[1])
         # Define grid
@@ -62,12 +50,13 @@ class Output(tk.LabelFrame):
         self.text_voltage = tk.Text(self, width = 20, height = 2)
 
         #Declare variable
-        page1 = Input(self)
+        variable = Variable()
+
         #Insert text to text box
-        self.text_x.insert('1.0', page1.variable[0])
-        self.text_y.insert('1.0', page1.variable[1])
-        self.text_rpm.insert('1.0', page1.variable[2])
-        self.text_voltage.insert('1.0', page1.variable[3])
+        self.text_x.insert('1.0', variable.position_x)
+        self.text_y.insert('1.0', variable.position_y)
+        self.text_rpm.insert('1.0', variable.rpm)
+        self.text_voltage.insert('1.0', variable.voltage)
 
         #State edit
         self.text_x.config(state = 'disabled')
@@ -91,6 +80,3 @@ class Button(tk.Frame):
         self.button_back = tk.Button(self, text='Back', command = b_back)
         self.button_sim.pack(side='right', padx=5, pady=5)
         self.button_back.pack(side='right', padx=5, pady=5)
-
-""" # Create and run the app
-app = App('Simulation', (850, 600)) """
