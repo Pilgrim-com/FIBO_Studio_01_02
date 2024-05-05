@@ -155,11 +155,11 @@ class Input(ctk.CTkFrame):
         self.Add_button.grid(row=4, column=0, padx=20, pady=(5, 20), sticky="e")
 
 class Button(ctk.CTkFrame):
-    def check_value(self, next_page):
+    """ def check_value(self, next_page):
         if Variable.position_x == -1 or Variable.position_y == -1:
             print('Please enter the position')
         else:
-            next_page
+            next_page """
     def __init__(self, parent, next_page):
         super().__init__(parent, bg_color = '#2B2B2B')
 
@@ -171,6 +171,6 @@ class Button(ctk.CTkFrame):
                                     hover_color = "#506988",
                                     text_color = 'black',
                                     corner_radius = 10,
-                                    command = self.check_value(next_page))
+                                    command = next_page)
         
         self.button.pack(side = 'bottom', pady = 10)
