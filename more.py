@@ -2,11 +2,11 @@ import customtkinter as ctk
 from tkinter import *
 
 class Variable:
-    position_x = 0
-    position_y = 0
-    velocity_start = 0
-    rpm = 0
-    voltage = 0
+    position_x = -1
+    position_y = -1
+    velocity_start = -1
+    rpm = -1
+    voltage = -1
     
     """ def __init__(self):
         self.position_x = 0
