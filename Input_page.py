@@ -6,7 +6,7 @@ from more import Variable, Title
 
 class Page1(ctk.CTkFrame):
     def __init__(self, parent, size, next_page):
-        super().__init__(parent, width = size[0], height = size[1], bg_color = '#2B2B2B')
+        super().__init__(parent, width = size[0], height = size[1], bg_color = '#2C2C2C')
 
         # Define grid
         self.columnconfigure(0, weight=1)
@@ -67,15 +67,17 @@ class Canvas(ctk.CTkFrame):
         canvas.create_line(y_x0, y_y0, y_x1, y_y1, width = 3, fill="#A4574F")
 
     def __init__(self, parent):
-        super().__init__(parent, width = 425, height = 300, bg_color = '#2B2B2B')
+        super().__init__(parent, width = 425, height = 300, bg_color = '#2C2C2C')
         
         # Create and place canvas for triangle
-        self.canvas = tk.Canvas(self, width=400, height=364.4, bg = '#2B2B2B')
+        self.canvas = tk.Canvas(self, width=400, height=364.4, bg = '#2C2C2C')
 
         # Draw on canvas
         self.draw_triangle(self.canvas)
         self.draw_circle(self.canvas)
         self.draw_line(self.canvas)
+        self.canvas.create_text( 393, 165, text = 'x', font = ('Arial', 20), fill = "#96A5C3")
+        self.canvas.create_text( 213.2, 350.4, text = 'y', font = ('Arial', 20), fill = "#A4574F")
 
         # Layout
         self.canvas.pack()
@@ -121,12 +123,12 @@ class Input(ctk.CTkFrame):
         super().__init__(parent, width = 425, height = 300, bg_color = '#2B2B2B')
 
         # Create label and text box widgets
-        self.label_x = ctk.CTkLabel(self, text="Posiotion x : ", font = ('Arial', 20))
-        self.label_y = ctk.CTkLabel(self, text="Posiotion y : ", font = ('Arial', 20))
+        self.label_x = ctk.CTkLabel(self, text="Target Posiotion x : ", font = ('Arial', 20))
+        self.label_y = ctk.CTkLabel(self, text="Target Posiotion y : ", font = ('Arial', 20))
         
         # Create entry and button widgets
-        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position', width = 180, height = 30, corner_radius = 10)
-        self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position', width = 180, height = 30, corner_radius = 10)
+        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position of target (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position of target (mm)', width = 210, height = 30, corner_radius = 10)
 
         #Button
         self.Add_button = ctk.CTkButton(self,
@@ -148,18 +150,13 @@ class Input(ctk.CTkFrame):
         
         # Place label, text box, entry, button, and another text widgets using grid layout
         self.label_x.grid(row=0, column=0, padx=20, pady = (20,0), sticky="w")
-        self.entry_x.grid(row=1, column=0, padx=20, pady=5, sticky="w")
+        self.entry_x.grid(row=1, column=0, padx=20, pady=(5, 15), sticky="w")
         self.label_y.grid(row=2, column=0, padx=20, sticky="w")
         self.entry_y.grid(row=3, column=0, padx=20, pady=5, sticky="w")
-        self.Re_button.grid(row=4, column=0, padx=20, pady=(5, 20), sticky="w")
-        self.Add_button.grid(row=4, column=0, padx=20, pady=(5, 20), sticky="e")
+        self.Re_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="w")
+        self.Add_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="e")
 
 class Button(ctk.CTkFrame):
-    """ def check_value(self, next_page):
-        if Variable.position_x == -1 or Variable.position_y == -1:
-            print('Please enter the position')
-        else:
-            next_page """
     def __init__(self, parent, next_page):
         super().__init__(parent, bg_color = '#2B2B2B')
 
@@ -172,5 +169,4 @@ class Button(ctk.CTkFrame):
                                     text_color = 'black',
                                     corner_radius = 10,
                                     command = next_page)
-        
-        self.button.pack(side = 'bottom', pady = 10)
+        self.button.pack(side = 'bottom', pady = (0, 10))

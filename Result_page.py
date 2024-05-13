@@ -31,8 +31,8 @@ class Output(ctk.CTkFrame):
         super().__init__(parent, bg_color = '#2B2B2B')
 
         #Label
-        self.label_x = ctk.CTkLabel(self, text="Position x (mm) :", font = ('Araial', 20))
-        self.label_y = ctk.CTkLabel(self, text="Position y (mm) :", font = ('Araial', 20))
+        self.label_x = ctk.CTkLabel(self, text="Launcher Position x :", font = ('Araial', 20))
+        self.label_y = ctk.CTkLabel(self, text="Launcher Position y :", font = ('Araial', 20))
         self.label_rpm = ctk.CTkLabel(self, text="RPM :", font = ('Araial', 20))
         self.label_voltage = ctk.CTkLabel(self, text="Moter Voltage :", font = ('Araial', 20))
 
@@ -41,25 +41,25 @@ class Output(ctk.CTkFrame):
 
         #Text box by Entry state disabled
         self.text_x1 = ctk.CTkEntry(self, 
-                                       placeholder_text = 'x position',
-                                       font = ('Arial', 18), 
+                                       placeholder_text = 'x position of launcher (mm)',
+                                       font = ('Arial', 16), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
-        self.text_y1 = ctk.CTkEntry(self, placeholder_text = 'y position', 
-                                       font = ('Arial', 18), 
+        self.text_y1 = ctk.CTkEntry(self, placeholder_text = 'y position of lanucher (mm)', 
+                                       font = ('Arial', 16), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
         self.text_rpm1 = ctk.CTkEntry(self, placeholder_text = 'rpm',
-                                       font = ('Arial', 18), 
+                                       font = ('Arial', 16), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
         self.text_voltage1 = ctk.CTkEntry(self, placeholder_text = 'voltage', 
-                                       font = ('Arial', 18), 
+                                       font = ('Arial', 16), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
 
         # Create button for Calculate
@@ -101,22 +101,22 @@ class Output(ctk.CTkFrame):
                                        placeholder_text = str(variable.position_x),
                                        font = ('Arial', 18), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
         self.text_y = ctk.CTkEntry(self, placeholder_text = str(variable.position_y), 
                                        font = ('Arial', 18), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
         self.text_rpm = ctk.CTkEntry(self, placeholder_text = str(variable.rpm),
                                        font = ('Arial', 18), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
         self.text_voltage = ctk.CTkEntry(self, placeholder_text = str(variable.voltage), 
                                        font = ('Arial', 18), 
                                        placeholder_text_color = 'white', 
-                                       width = 250, height = 45, 
+                                       width = 300, height = 45,
                                        corner_radius = 10)
         
         print(variable.position_x)
@@ -138,8 +138,8 @@ class Output(ctk.CTkFrame):
         self.text_voltage.grid(row = 3, column = 1, sticky = 'w', padx = 100, pady = 5)
 
 class Button(ctk.CTkFrame):
-    def __init__(self, parent, next_page, back_page, bg_color = '#2B2B2B'):
-        super().__init__(parent)
+    def __init__(self, parent, next_page, back_page):
+        super().__init__(parent, bg_color = '#2B2B2B')
 
         self.button_sim = ctk.CTkButton(self,
                                     text = 'Next',
@@ -159,6 +159,5 @@ class Button(ctk.CTkFrame):
                                     text_color = 'black',
                                     corner_radius = 10,
                                     command = back_page)
-        
-        self.button_sim.pack(side='right', padx=7, pady=10)
-        self.button_back.pack(side='right', padx=7, pady=10)
+        self.button_sim.pack(side='right', padx=(7, 0), pady=(0, 10))
+        self.button_back.pack(side='right', padx=(0, 7), pady=(0, 10))
