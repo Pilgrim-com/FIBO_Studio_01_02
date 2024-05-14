@@ -22,7 +22,7 @@ class Main_App(ctk.CTk):
         
         page1 = Page1(self, size, self.next_page)
         page2 = Page2(self, size, self.next_page, self.back_page)
-        page3 = Page3(self, size, self.back_page)
+        page3 = Page3(self, size, self.next_page, self.back_page)
         self.pages = [page1, page2, page3]
 
         self.pages[self.current_page].pack(fill = 'both', expand = True)

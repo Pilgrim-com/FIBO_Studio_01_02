@@ -1,4 +1,3 @@
-import tkinter as tk
 import customtkinter as ctk
 from tkinter import *
 from more import Variable, Title
@@ -137,9 +136,9 @@ class Output(ctk.CTkFrame):
         self.text_voltage1.grid_forget()
         self.text_voltage.grid(row = 3, column = 1, sticky = 'w', padx = 100, pady = 5)
 
-class Button(ctk.CTkFrame):
+class Button(Frame):
     def __init__(self, parent, next_page, back_page):
-        super().__init__(parent, bg_color = '#2B2B2B')
+        super().__init__(parent, bg = '#2B2B2B')
 
         self.button_sim = ctk.CTkButton(self,
                                     text = 'Next',

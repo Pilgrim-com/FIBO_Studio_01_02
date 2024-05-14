@@ -156,9 +156,9 @@ class Input(ctk.CTkFrame):
         self.Re_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="w")
         self.Add_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="e")
 
-class Button(ctk.CTkFrame):
+class Button(Frame):
     def __init__(self, parent, next_page):
-        super().__init__(parent, bg_color = '#2B2B2B')
+        super().__init__(parent, bg = '#2B2B2B')
 
         self.button = ctk.CTkButton(self,
                                     text = 'Calculate',
