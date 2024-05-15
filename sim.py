@@ -13,9 +13,10 @@ clock = pygame.time.Clock()
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 # Constants
-origin = (160, 430)
+origin = (160, 400)
 g = 9.81
 
 # Define projectile class
@@ -31,7 +32,7 @@ class Projectile(pygame.sprite.Sprite):
         self.vx = self.u * math.cos(self.theta)
         self.vy = -self.u * math.sin(self.theta)
         self.time = 0
-        self.dt = 0.1  # time step
+        self.dt = 0.1 # Time step
 
         self.range_ = 765
         self.path = []
@@ -50,39 +51,41 @@ class Projectile(pygame.sprite.Sprite):
         self.path = self.path[-50:]
 
         # Draw projectile
-        pygame.draw.circle(win, self.color, (int(self.x), int(self.y)), 5)
-        pygame.draw.circle(win, WHITE, (int(self.x), int(self.y)), 5, 1)
-        for pos in self.path[:-1:5]:
-            pygame.draw.circle(win, WHITE, (int(pos[0]), int(pos[1])), 1)
+        pygame.draw.circle(win, self.color, (int(self.x), int(self.y)), 5) #color, position, radius
+        pygame.draw.circle(win, RED, (int(self.x), int(self.y)), 5, 1)#color, position, radius, width
+        for pos in self.path[:-1:2]:
+            pygame.draw.circle(win, RED, (int(pos[0]), int(pos[1])), 1)
 
 # Define your rectangle class
 class Rectangle:
-    def __init__(self, x, y, width, height):
+    def __init__(self, x, y, width, height, color):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.color = BLACK
+        self.color = color
 
     def draw(self):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
 
 def main():
     # Target coordinates
-    target_x, target_y = 765, 263
+    target_x, target_y = 765, 263 - 91.5
     dx = target_x - origin[0]
     dy = origin[1] - target_y
 
     # Fixed angle (45 degrees in radians)
     theta = math.radians(45)
 
+    theta2 = 45
     # Calculate the necessary initial velocity (u) for the projectile to hit the target
-    u = math.sqrt((dx * g) / math.sin(2 * theta))
+    u = math.sqrt((-0.5 * g * dx * dx)/((dy - dx * math.tan(theta2))*(math.cos(theta2)**2)))
 
     projectile = Projectile(u, 45)  # Initial velocity and fixed angle (45 degrees)
-    wall = Rectangle(460, 310, 10, 180)  # Initial position and dimensions of the rectangle
-    target = Rectangle(760, 263, 10, 227)  # Initial position and dimensions of the target rectangle
-    floor = Rectangle(80, 490, 690, 10)  # Floor rectangle
+    wall = Rectangle(460, 310, 10, 180, BLACK)  # Initial position and dimensions of the rectangle
+    target = Rectangle(760, 263 - 91.5, 10, 19.5, RED) # Initial position and dimensions of the target rectangle
+    base = Rectangle(760, 263, 10, 227, BLACK)  # Initial position and dimensions of the target rectangle
+    floor = Rectangle(40, 490, 730, 10, BLACK)  # Floor rectangle
 
     running = True
     while running:
@@ -102,9 +105,10 @@ def main():
         wall.draw()
         target.draw()
         floor.draw()
+        base.draw()
 
         # Draw triangle
-        pygame.draw.polygon(win, BLACK, [(80, 490), (160, 490), (160, 430)])
+        pygame.draw.polygon(win, BLACK, [(40, 490), (160, 490), (160, 400)])#color, position, radius
 
         pygame.display.flip()
         clock.tick(60)
