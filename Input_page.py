@@ -95,7 +95,7 @@ class Input(ctk.CTkFrame):
         x = int(self.entry_x.get())
         y = int(self.entry_y.get())
         Variable.position_x = x - 125
-        Variable.position_y = 0
+        Variable.position_y = y
         print(Variable.position_x,Variable.position_y)
 
     def Velocity(self):

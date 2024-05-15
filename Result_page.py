@@ -102,7 +102,7 @@ class Output(ctk.CTkFrame):
                                        placeholder_text_color = 'white', 
                                        width = 300, height = 45,
                                        corner_radius = 10)
-        self.text_y = ctk.CTkEntry(self, placeholder_text = str(variable.position_y), 
+        self.text_y = ctk.CTkEntry(self, placeholder_text = 0, 
                                        font = ('Arial', 18), 
                                        placeholder_text_color = 'white', 
                                        width = 300, height = 45,
