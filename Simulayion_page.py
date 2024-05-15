@@ -8,13 +8,6 @@ from tkinter import *
 from more import Variable, Title
 import math
 
-# Constants for the simulation
-SCREEN = WIDTH, HEIGHT = 900, 550
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GREEN = (0, 255, 0)
-ORIGIN = (160, 400)
-G = 9.81
 
 class Page3(ctk.CTkFrame):
     def __init__(self, parent, size, next_page, back_page):
@@ -52,8 +45,8 @@ class Projectile(pygame.sprite.Sprite):
         super().__init__()
         self.u = u
         self.theta = math.radians(abs(theta))
-        self.x, self.y = ORIGIN
-        self.color = BLACK
+        self.x, self.y = Variable.ORIGIN
+        self.color = Variable.BLACK
 
         # Calculate initial horizontal and vertical components of velocity
         self.vx = self.u * math.cos(self.theta)
@@ -66,8 +59,8 @@ class Projectile(pygame.sprite.Sprite):
 
     def update(self):
         self.time += self.dt
-        self.x = ORIGIN[0] + self.vx * self.time
-        self.y = ORIGIN[1] + (self.vy * self.time + 0.5 * G * self.time ** 2)
+        self.x = Variable.ORIGIN[0] + self.vx * self.time
+        self.y = Variable.ORIGIN[1] + (self.vy * self.time + 0.5 * Variable.G * self.time ** 2)
 
         if self.x >= self.range_:
             self.vx = 0
@@ -78,10 +71,10 @@ class Projectile(pygame.sprite.Sprite):
         self.path = self.path[-50:]
 
         # Draw projectile
-        pygame.draw.circle(self.screen, GREEN, (int(self.x), int(self.y)), 7) #color, position, radius
-        pygame.draw.circle(self.screen, WHITE, (int(self.x), int(self.y)), 5, 1) #color, position, radius, width
+        pygame.draw.circle(self.screen, Variable.GREEN, (int(self.x), int(self.y)), 7) #color, position, radius
+        pygame.draw.circle(self.screen, Variable.WHITE, (int(self.x), int(self.y)), 5, 1) #color, position, radius, width
         for pos in self.path[:-1:2]:
-            pygame.draw.circle(self.screen, GREEN, (int(pos[0]), int(pos[1])), 1)
+            pygame.draw.circle(self.screen, Variable.GREEN, (int(pos[0]), int(pos[1])), 1)
 
 # Define your rectangle class
 class Rectangle:
@@ -103,10 +96,10 @@ class Simulation(Frame):
         self.projectiles = []
 
         # Create the static elements
-        self.wall = Rectangle(460, 310, 10, 180, BLACK)
-        self.target = Rectangle(760, 263 - 60, 10, 19.5, GREEN)
-        self.base = Rectangle(760, 263, 10, 227, BLACK)
-        self.floor = Rectangle(40, 490, 730, 10, BLACK)
+        self.wall = Rectangle(460, 310, 10, 180, Variable.BLACK)
+        self.target = Rectangle(760, 263 - 60, 10, 19.5, Variable.GREEN)
+        self.base = Rectangle(760, 263, 10, 227, Variable.BLACK)
+        self.floor = Rectangle(40, 490, 730, 10, Variable.BLACK)
         
         self.update_pygame()
 
@@ -122,12 +115,12 @@ class Simulation(Frame):
     def add_projectile(self, x, y):
         # Add a projectile at the specified position with initial velocities
         # Calculate the necessary initial velocity (u) for the projectile to hit the target
-        target_x, target_y = 765, 263 - 60#max 91.5 = 30.5 * 3
-        dx = target_x - ORIGIN[0]
-        dy = ORIGIN[1] - target_y
+        target_x, target_y = 765, 263 - 60 # max 91.5 = 30.5 * 3
+        dx = target_x - Variable.ORIGIN[0]
+        dy = Variable.ORIGIN[1] - target_y
         theta = 45
         theta_rad = math.radians(theta)
-        u = math.sqrt((-0.5 * G * dx * dx) / ((dy - dx * math.tan(theta_rad)) * (math.cos(theta_rad) ** 2)))
+        u = math.sqrt((-0.5 * Variable.G * dx * dx) / ((dy - dx * math.tan(theta_rad)) * (math.cos(theta_rad) ** 2)))
         self.projectiles.append(Projectile(u, theta))
 
     def update_pygame(self):
@@ -139,7 +132,7 @@ class Simulation(Frame):
                 sys.exit()
 
         # Clear the screen with white color
-        self.screen.fill(WHITE)
+        self.screen.fill(Variable.WHITE)
 
         # Move and draw each projectile
         for projectile in self.projectiles:
@@ -156,7 +149,7 @@ class Simulation(Frame):
         """ pygame.draw.line(self.screen, BLACK, ORIGIN, (ORIGIN[0] + 100, ORIGIN[1]), 2)
         pygame.draw.line(self.screen, BLACK, ORIGIN, (ORIGIN[0], ORIGIN[1] - 100), 2)
         pygame.draw.circle(self.screen, BLACK, ORIGIN, 2) """
-        pygame.draw.polygon(self.screen, BLACK, [(40, 490), (160, 490), (160, 400)])
+        pygame.draw.polygon(self.screen, Variable.BLACK, [(40, 490), (160, 490), (160, 400)])
 
         pygame.display.update()
 

@@ -107,7 +107,7 @@ class Input(ctk.CTkFrame):
         print('%.3f' %Variable.velocity_start)
 
     def RPM(self):
-        dutyCycle = (int(self.entry_y.get()) - 88) * (53 - 49) / (305 - 88) + 49
+        dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
         Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
         # omega = 2*Variable.velocity_start / (63*0.001) 
         # Variable.rpm = math.ceil(omega*60/(2*math.pi))
@@ -137,8 +137,8 @@ class Input(ctk.CTkFrame):
         self.label_y = ctk.CTkLabel(self, text="Target Posiotion y : ", font = ('Arial', 20))
         
         # Create entry and button widgets
-        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position of target (mm)', width = 210, height = 30, corner_radius = 10)
-        self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position of target (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 400 (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position 83 - 305 (mm)', width = 210, height = 30, corner_radius = 10)
 
         #Button
         self.Add_button = ctk.CTkButton(self,

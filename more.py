@@ -7,6 +7,11 @@ class Variable:
     velocity_start = -1
     rpm = -1
     voltage = -1
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
+    GREEN = (0, 255, 0)
+    ORIGIN = (160, 400)
+    G = 9.81
 
 class Title(ctk.CTkFrame):
     def __init__(self, parent, title):

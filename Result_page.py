@@ -97,7 +97,7 @@ class Output(ctk.CTkFrame):
 
         #Text box by Entry state disabled
         self.text_x = ctk.CTkEntry(self, 
-                                       placeholder_text = str(variable.position_x + 125),
+                                       placeholder_text = str(variable.position_x),
                                        font = ('Arial', 18), 
                                        placeholder_text_color = 'white', 
                                        width = 300, height = 45,
