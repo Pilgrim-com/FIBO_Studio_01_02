@@ -1,3 +1,4 @@
+import math
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import *
@@ -91,20 +92,29 @@ class Input(ctk.CTkFrame):
         self.Moter_voltage()
     
     def Position(self):
-        Variable.position_x = int(self.entry_x.get())
-        Variable.position_y = int(self.entry_y.get())
-        print(Variable.position_x, Variable.position_y)
+        x = int(self.entry_x.get())
+        y = int(self.entry_y.get())
+        Variable.position_x = x - 125
+        Variable.position_y = 0
+        print(Variable.position_x,Variable.position_y)
 
     def Velocity(self):
-        Variable.velocity_start = int(Variable.position_x) * int(Variable.position_y)
-        print(Variable.velocity_start)
+        g = 9.81
+        y = int(self.entry_y.get())
+        h = 0.755 + (y*0.001)
+        u = (4*(-g))/(h-2)
+        Variable.velocity_start = math.sqrt(u)
+        print('%.3f' %Variable.velocity_start)
 
     def RPM(self):
-        Variable.rpm = int(Variable.velocity_start) * 2
+        dutyCycle = (int(self.entry_y.get()) - 88) * (53 - 49) / (305 - 88) + 49
+        Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
+        # omega = 2*Variable.velocity_start / (63*0.001) 
+        # Variable.rpm = math.ceil(omega*60/(2*math.pi))
         print(Variable.rpm)
 
     def Moter_voltage(self):
-        Variable.voltage = int(Variable.rpm) * 2
+        Variable.voltage = 24 * Variable.rpm / 4000
         print(Variable.voltage)
     
     def delete(self):
