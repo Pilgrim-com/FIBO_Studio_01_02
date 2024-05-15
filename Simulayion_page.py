@@ -97,7 +97,7 @@ class Simulation(Frame):
 
         # Create the static elements
         self.wall = Rectangle(460, 310, 10, 180, Variable.BLACK)
-        self.target = Rectangle(760, 263 - 60, 10, 19.5, Variable.GREEN)
+        self.target =  Rectangle(760, 263 - (Variable.position_y * 0.1 * 3), 10, 19.5 + (Variable.position_y * 0.1 *3), Variable.GREEN)
         self.base = Rectangle(760, 263, 10, 227, Variable.BLACK)
         self.floor = Rectangle(40, 490, 730, 10, Variable.BLACK)
         
@@ -115,7 +115,7 @@ class Simulation(Frame):
     def add_projectile(self, x, y):
         # Add a projectile at the specified position with initial velocities
         # Calculate the necessary initial velocity (u) for the projectile to hit the target
-        target_x, target_y = 765, 263 - 60 # max 91.5 = 30.5 * 3
+        target_x, target_y = 765, 263 - (Variable.position_y * 0.1 * 3) # max 91.5 = 30.5 * 3
         dx = target_x - Variable.ORIGIN[0]
         dy = Variable.ORIGIN[1] - target_y
         theta = 45

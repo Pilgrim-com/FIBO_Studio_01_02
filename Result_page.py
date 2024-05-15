@@ -33,7 +33,7 @@ class Output(ctk.CTkFrame):
         self.label_x = ctk.CTkLabel(self, text="Launcher Position x :", font = ('Araial', 20))
         self.label_y = ctk.CTkLabel(self, text="Launcher Position y :", font = ('Araial', 20))
         self.label_rpm = ctk.CTkLabel(self, text="RPM :", font = ('Araial', 20))
-        self.label_voltage = ctk.CTkLabel(self, text="Moter Voltage :", font = ('Araial', 20))
+        self.label_voltage = ctk.CTkLabel(self, text="Motor Voltage :", font = ('Araial', 20))
 
         #Declare variable
         variable = Variable()
@@ -45,7 +45,7 @@ class Output(ctk.CTkFrame):
                                        placeholder_text_color = 'white', 
                                        width = 300, height = 45,
                                        corner_radius = 10)
-        self.text_y1 = ctk.CTkEntry(self, placeholder_text = 'y position of lanucher (mm)', 
+        self.text_y1 = ctk.CTkEntry(self, placeholder_text = 'y position of launcher (mm)', 
                                        font = ('Arial', 16), 
                                        placeholder_text_color = 'white', 
                                        width = 300, height = 45,
