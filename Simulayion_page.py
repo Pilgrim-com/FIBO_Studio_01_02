@@ -97,7 +97,7 @@ class Simulation(Frame):
 
         # Create the static elements
         self.wall = Rectangle(460, 310, 10, 180, Variable.BLACK)
-        self.target =  Rectangle(760, 263 - (Variable.position_y * 0.1 * 3), 10, 19.5 + (Variable.position_y * 0.1 *3), Variable.GREEN)
+        self.target =  Rectangle(760, 263 - (Variable.position_y * 0.1 * 3), 10, 19.5, Variable.GREEN)
         self.base = Rectangle(760, 263, 10, 227, Variable.BLACK)
         self.floor = Rectangle(40, 490, 730, 10, Variable.BLACK)
         
