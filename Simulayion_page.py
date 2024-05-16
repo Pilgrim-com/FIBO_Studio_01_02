@@ -35,9 +35,7 @@ class Page3(ctk.CTkFrame):
 
     def shoot_projectile(self):
         # Shoot a projectile from the left side of the screen towards the right
-        x = 160
-        y = 400  # Starting near the bottom
-        self.simulation_frame.add_projectile(x, y)
+        self.simulation_frame.add_projectile()
 
 # Define projectile class
 class Projectile(pygame.sprite.Sprite):
@@ -112,7 +110,10 @@ class Simulation(Frame):
         self.screen = pygame.display.set_mode((self.winfo_width(), self.winfo_height()))
         self.clock = pygame.time.Clock()
 
-    def add_projectile(self, x, y):
+    def add_projectile(self):
+        # Create target
+        self.target =  Rectangle(760, 263 - (Variable.position_y * 0.1 * 3), 10, 19.5, Variable.GREEN)
+
         # Add a projectile at the specified position with initial velocities
         # Calculate the necessary initial velocity (u) for the projectile to hit the target
         target_x, target_y = 765, 263 - (Variable.position_y * 0.1 * 3) # max 91.5 = 30.5 * 3
@@ -122,6 +123,7 @@ class Simulation(Frame):
         theta_rad = math.radians(theta)
         u = math.sqrt((-0.5 * Variable.G * dx * dx) / ((dy - dx * math.tan(theta_rad)) * (math.cos(theta_rad) ** 2)))
         self.projectiles.append(Projectile(u, theta))
+        print((Variable.position_y * 0.1 * 3))
 
     def update_pygame(self):
         # Handle Pygame events
@@ -140,8 +142,8 @@ class Simulation(Frame):
             projectile.update()
 
         # Draw static elements
-        self.wall.draw(self.screen)
         self.target.draw(self.screen)
+        self.wall.draw(self.screen)
         self.base.draw(self.screen)
         self.floor.draw(self.screen)
 

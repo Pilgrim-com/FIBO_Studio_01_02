@@ -118,11 +118,6 @@ class Output(ctk.CTkFrame):
                                        width = 300, height = 45,
                                        corner_radius = 10)
         
-        print(variable.position_x)
-        print(variable.position_y)
-        print(variable.rpm)
-        print(variable.voltage)
-        
         # New layout
         self.text_x1.grid_forget()
         self.text_x.grid(row = 1, column = 0, sticky = 'w', padx = 100, pady = 5)

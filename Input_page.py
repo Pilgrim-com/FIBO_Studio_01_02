@@ -93,29 +93,23 @@ class Input(ctk.CTkFrame):
     
     def Position(self):
         x = int(self.entry_x.get())
-        y = int(self.entry_y.get())
+        Variable.position_y = int(self.entry_y.get())
         Variable.position_x = x - 125
-        Variable.position_y = y
-        print(Variable.position_x,Variable.position_y)
 
     def Velocity(self):
         g = 9.81
-        y = int(self.entry_y.get())
-        h = 0.755 + (y*0.001)
+        h = 0.755 + (Variable.position_y * 0.001)
         u = (4*(-g))/(h-2)
         Variable.velocity_start = math.sqrt(u)
-        print('%.3f' %Variable.velocity_start)
 
     def RPM(self):
         dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
         Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
         # omega = 2*Variable.velocity_start / (63*0.001) 
         # Variable.rpm = math.ceil(omega*60/(2*math.pi))
-        print(Variable.rpm)
 
     def Moter_voltage(self):
         Variable.voltage = 24 * Variable.rpm / 4000
-        print(Variable.voltage)
     
     def delete(self):
         # Clear entry
