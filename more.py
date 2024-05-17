@@ -13,9 +13,16 @@ class Variable:
     ORIGIN = (160, 400)
     G = 9.81
 
-class Title(ctk.CTkFrame):
+class canvas(Frame):
+    def __init__(self, parent, width, height, bg):
+        super().__init__(parent, bg = '#FFFFFF')
+        
+        # Create and place canvas for triangle
+        self.canvas = Canvas(parent, width = width, height = height, bg = bg)
+
+class Title(Frame):
     def __init__(self, parent, title):
-        super().__init__(parent, bg_color = '#2C2C2C')
-        self.label = ctk.CTkLabel(self, text = title, font = ('Inter', 32), bg_color = '#2C2C2C')
-        self.label.pack()
+        super().__init__(parent, bg = '#2C2C2C')
+        self.label = ctk.CTkLabel(self, text = title, font = ('Interb', 32), bg_color = '#2C2C2C')
+        self.label.pack(pady = (15, 0))
         

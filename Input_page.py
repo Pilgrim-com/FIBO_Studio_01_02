@@ -71,7 +71,7 @@ class Canvas(ctk.CTkFrame):
         super().__init__(parent, width = 425, height = 300, bg_color = '#2C2C2C')
         
         # Create and place canvas for triangle
-        self.canvas = tk.Canvas(self, width=400, height=364.4, bg = '#2C2C2C')
+        self.canvas = tk.Canvas(self, width=400, height=364.4, bg = '#FFFFFF')
 
         # Draw on canvas
         self.draw_triangle(self.canvas)
@@ -106,10 +106,12 @@ class Input(ctk.CTkFrame):
         dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
         Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
         # omega = 2*Variable.velocity_start / (63*0.001) 
-        # Variable.rpm = math.ceil(omega*60/(2*math.pi))
+        # Variable.rpm = '%.2f' %(omega*60/(2*math.pi))
 
     def Moter_voltage(self):
         Variable.voltage = 24 * Variable.rpm / 4000
+        # V_timport = (int(self.entry_y.get()) - 85) * (2.73 - 2.59) / (305 - 85) + 2.59
+        # Variable.voltage = '%.3f' %V_timport
     
     def delete(self):
         # Clear entry
@@ -131,7 +133,7 @@ class Input(ctk.CTkFrame):
         self.label_y = ctk.CTkLabel(self, text="Target Posiotion y : ", font = ('Arial', 20))
         
         # Create entry and button widgets
-        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 400 (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 275 (mm)', width = 210, height = 30, corner_radius = 10)
         self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position 83 - 305 (mm)', width = 210, height = 30, corner_radius = 10)
 
         #Button
@@ -165,7 +167,7 @@ class Button(Frame):
         super().__init__(parent, bg = '#2B2B2B')
 
         self.button = ctk.CTkButton(self,
-                                    text = 'Calculate',
+                                    text = 'Next',
                                     width = 25, height = 30,
                                     font = ('Arial', 16),
                                     fg_color = '#99B4DA',

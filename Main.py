@@ -1,8 +1,6 @@
-import tkinter as tk
 import customtkinter as ctk
-from tkinter import *
 from Simulayion_page import Page3
-from Result_page import Page2
+from Setup_page import Page2
 from Input_page import Page1
 
 class Main_App(ctk.CTk):
