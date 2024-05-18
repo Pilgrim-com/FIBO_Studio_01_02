@@ -129,11 +129,11 @@ class Input(ctk.CTkFrame):
         super().__init__(parent, width = 425, height = 300, bg_color = '#2B2B2B')
 
         # Create label and text box widgets
-        self.label_x = ctk.CTkLabel(self, text="Target Posiotion x : ", font = ('Arial', 20))
-        self.label_y = ctk.CTkLabel(self, text="Target Posiotion y : ", font = ('Arial', 20))
+        self.label_x = ctk.CTkLabel(self, text="Target Position x : ", font = ('Arial', 20))
+        self.label_y = ctk.CTkLabel(self, text="Target Position y : ", font = ('Arial', 20))
         
         # Create entry and button widgets
-        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 275 (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 350 (mm)', width = 210, height = 30, corner_radius = 10)
         self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position 83 - 305 (mm)', width = 210, height = 30, corner_radius = 10)
 
         #Button

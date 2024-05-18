@@ -57,15 +57,15 @@ class Canvas(ctk.CTkFrame):
         x3, y3 = 370, 337
 
         # Define coordinates for the launcher
-        x4, y4 = 30 + (Variable.position_x * 0.85), 30
-        x5, y5 = 30 + 212.5 + (Variable.position_x * 0.85), 337
+        x4, y4 = 30 + (Variable.position_x * 0.68), 30
+        x5, y5 = 30 + 170 + (Variable.position_x * 0.68), 337
 
         # Draw a filled rectangle (x1, y1, x2, y2)
         self.canvas.create_rectangle(x0, y0, x1, y1, fill="white")
         self.canvas.create_rectangle(x2, y2, x3, y3, fill="#99B4DA", outline="black", width=1)
         self.draw_line()
         self.canvas.create_rectangle(x4, y4, x5, y5, fill="#506988", outline="black", width=2)
-        self.canvas.create_text((277.5 / 2) + (Variable.position_x * 0.85), y5 / 2 , text='Launcher', font=('Arial', 16), fill="black", anchor='center')
+        self.canvas.create_text((170 / 2) + (Variable.position_x * 0.68) + 30, y5 / 2 , text='Launcher', font=('Arial', 16), fill="black", anchor='center')
     
     def draw_line(self):
         # Define coordinates for the line y
@@ -87,9 +87,9 @@ class Canvas(ctk.CTkFrame):
         if Variable.position_x != -1:
             # Draw range of position launcher change
             self.canvas.create_line(30, 15, 30, 25, fill='black', width=1.5)
-            self.canvas.create_line(30 + (Variable.position_x * 0.85), 15, 30 + (Variable.position_x * 0.85), 25, fill='black', width=1.5)
-            self.canvas.create_line(30, 20, 30 + (Variable.position_x * 0.85), 20, fill='black', width=1.5)
-            self.canvas.create_text(50 + (Variable.position_x * 0.85), 20, text = Variable.position_x, font=('Arial', 14), fill="black", anchor='center')
+            self.canvas.create_line(30 + (Variable.position_x * 0.68), 15, 30 + (Variable.position_x * 0.68), 25, fill='black', width=1.5)
+            self.canvas.create_line(30, 20, 30 + (Variable.position_x * 0.68), 20, fill='black', width=1.5)
+            self.canvas.create_text(50 + (Variable.position_x * 0.68), 20, text = Variable.position_x, font=('Arial', 14), fill="black", anchor='center')
 
     def update_canvas(self):
         # Example: Redraw the rectangle with new coordinates or properties
