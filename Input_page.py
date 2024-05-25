@@ -90,7 +90,7 @@ class Input(ctk.CTkFrame):
         Variable.position_y = int(self.entry_y.get())
         Variable.position_x = x - 125
         
-        print(Variable.position_x, Variable.position_y)
+        print(Variable.position_x + 125, Variable.position_y)
         if (Variable.position_x + 125 < 150 or Variable.position_x + 125 > 350) or (Variable.position_y < 83 or Variable.position_y > 305):
             messagebox.showerror("Error", 'Please enter the correct value of targrt position x and y')
         else:
