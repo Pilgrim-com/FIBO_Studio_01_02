@@ -2,11 +2,11 @@ import customtkinter as ctk
 from tkinter import *
 
 class Variable:
-    position_x = -1
-    position_y = -1
+    position_x = 0
+    position_y = 0
     velocity_start = -1
-    rpm = -1
-    voltage = -1
+    rpm = 0
+    voltage = 0
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     GREEN = (0, 255, 0)

@@ -30,8 +30,8 @@ class Page2(ctk.CTkFrame):
         self.result_frame.grid(row=1, column=2, sticky='w')
 
         # Back
-        self.back_frame = Button(self)
-        self.back_frame.grid(row=2, column=0, sticky='s', columnspan=3)
+        self.button_frame = Button(self)
+        self.button_frame.grid(row=2, column=0, sticky='s', columnspan=3)
 
 
 class Canvas(ctk.CTkFrame):
@@ -84,12 +84,14 @@ class Canvas(ctk.CTkFrame):
         for y in y_coords:
             self.canvas.create_line(y_x0, y, y_x1, y, fill='black', width=1)
 
-        if Variable.position_x != -1:
+        if Variable.position_x ==0:
+            self.canvas.create_text(202.5 + (Variable.position_x * 0.68), 15, text = "ตั้งเครื่องมุมซ้ายของสนาม", font=('Arial', 16), fill="black", anchor='center')
+        if Variable.position_x != 0:
             # Draw range of position launcher change
             self.canvas.create_line(30, 15, 30, 25, fill='black', width=1.5)
             self.canvas.create_line(30 + (Variable.position_x * 0.68), 15, 30 + (Variable.position_x * 0.68), 25, fill='black', width=1.5)
             self.canvas.create_line(30, 20, 30 + (Variable.position_x * 0.68), 20, fill='black', width=1.5)
-            self.canvas.create_text(50 + (Variable.position_x * 0.68), 20, text = Variable.position_x, font=('Arial', 14), fill="black", anchor='center')
+            self.canvas.create_text(80 + (Variable.position_x * 0.68), 20, text = f"{Variable.position_x} mm.", font=('Arial', 14), fill="black", anchor='center')
 
     def update_canvas(self):
         self.canvas.delete("all")  # Clear the canvas
@@ -122,15 +124,11 @@ class Result(ctk.CTkFrame):
 
     def calculate_value(self):
         # Declare variable
-        variable = Variable()
+        Variable.position_x = Variable.position_x - 125
         
-        # Example: Update variable values (replace with actual logic)
-        variable.rpm = self.entry_rpm.get() or variable.rpm
-        variable.voltage = self.entry_voltage.get() or variable.voltage
-        
-        self.text_rpm = ctk.CTkEntry(self, placeholder_text=str(variable.rpm), placeholder_text_color='white', width=210, height=30,
+        self.text_rpm = ctk.CTkEntry(self, placeholder_text = Variable.rpm, placeholder_text_color='white', width=210, height=30,
                                      corner_radius=10)
-        self.text_voltage = ctk.CTkEntry(self, placeholder_text=str(variable.voltage), placeholder_text_color='white', width=210, height=30,
+        self.text_voltage = ctk.CTkEntry(self, placeholder_text = Variable.voltage, placeholder_text_color='white', width=210, height=30,
                                          corner_radius=10)
         
         # New layout

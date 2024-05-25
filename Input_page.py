@@ -27,7 +27,7 @@ class Page1(ctk.CTkFrame):
         self.canvas_frame.grid(row = 1, column = 0, sticky='e')
 
         # Input
-        self.input_frame = Input(self)
+        self.input_frame = Input(self, canvas_frame = self.canvas_frame)
         self.input_frame.grid(row = 1, column = 2, sticky='w')
 
         # Back
@@ -35,6 +35,12 @@ class Page1(ctk.CTkFrame):
         self.back_frame.grid(row = 2, column = 0, sticky='s', columnspan = 3)
 
 class Canvas(ctk.CTkFrame):
+    def updeted_canvas(self):
+        self.canvas.delete("all")
+        self.draw_triangle(self.canvas)
+        self.draw_circle(self.canvas)
+        self.draw_line(self.canvas)
+
     def draw_triangle(self, canvas):
         # Define coordinates for the triangle
         x0, y0 = 50, 314.4  # Left point
@@ -46,24 +52,27 @@ class Canvas(ctk.CTkFrame):
 
     def draw_circle(self, canvas):
         # Define coordinate for the circle centered at (200, 182.2) with a radius of 50
-        x0, y0 = 150, 132.2
-        x1, y1 = 250, 232.2
+        x0, y0 = 25 + (Variable.position_x * 0.6), 289.4 - (Variable.position_y * 0.661)
+        x1, y1 = 75 + (Variable.position_x * 0.6), 339.4 - (Variable.position_y * 0.661)
 
         # Draw circle
-        canvas.create_oval(x0, y0, x1, y1, fill = 'white')
+        canvas.create_oval(x0, y0, x1, y1, fill = 'white') 
 
     def draw_line(self, canvas):
         # Define coordinates for the line x
-        x_x0, x_y0 = 0, 182.2
-        x_x1, x_y1 = 400, 182.2 
+        x_x0, x_y0 = 0, 314.4 - (Variable.position_y * 0.661)
+        x_x1, x_y1 = 400, 314.4 - (Variable.position_y * 0.661)
 
-        # Define coordinates for the line x
-        y_x0, y_y0 = 200, 0
-        y_x1, y_y1 = 200, 364.4 
+        # Define coordinates for the line y
+        y_x0, y_y0 = 50 + (Variable.position_x * 0.6), 0
+        y_x1, y_y1 = 50 + (Variable.position_x * 0.6), 364.4 
 
         # Draw line
         canvas.create_line(x_x0, x_y0, x_x1, x_y1, width = 3, fill="#96A5C3")
         canvas.create_line(y_x0, y_y0, y_x1, y_y1, width = 3, fill="#A4574F")
+        self.canvas.create_text( 393, (314.4 - 15) - ((Variable.position_y) * 0.661), text = 'x', font = ('Arial', 20), fill = "#96A5C3")
+        self.canvas.create_text( 50 + ((Variable.position_x + 20) * 0.6), 10, text = 'y', font = ('Arial', 20), fill = "#A4574F")
+        self.canvas.create_text( (50 + (Variable.position_x * 0.6)) + 55, (314.4 + 40) , text = f"({Variable.position_x}, {Variable.position_y})", font = ('Arial', 16), fill = "black")
 
     def __init__(self, parent):
         super().__init__(parent, width = 425, height = 300, bg_color = '#2C2C2C')
@@ -73,10 +82,7 @@ class Canvas(ctk.CTkFrame):
 
         # Draw on canvas
         self.draw_triangle(self.canvas)
-        self.draw_circle(self.canvas)
         self.draw_line(self.canvas)
-        self.canvas.create_text( 393, 165, text = 'x', font = ('Arial', 20), fill = "#96A5C3")
-        self.canvas.create_text( 213.2, 350.4, text = 'y', font = ('Arial', 20), fill = "#A4574F")
 
         # Layout
         self.canvas.pack()
@@ -85,12 +91,13 @@ class Input(ctk.CTkFrame):
     def Calculate(self):
         x = int(self.entry_x.get())
         Variable.position_y = int(self.entry_y.get())
-        Variable.position_x = x - 125
+        Variable.position_x = x
         
-        print(Variable.position_x + 125, Variable.position_y)
-        if (Variable.position_x + 125 < 150 or Variable.position_x + 125 > 350) or (Variable.position_y < 83 or Variable.position_y > 305):
+        print(Variable.position_x, Variable.position_y)
+        if (Variable.position_x < 150 or Variable.position_x > 350) or (Variable.position_y < 83 or Variable.position_y > 305):
             messagebox.showerror("Error", 'Please enter the correct value of targrt position x and y')
         else:
+            self.camvas_frame.updeted_canvas()
             self.Velocity()
             self.RPM()
             self.Moter_voltage()
@@ -102,13 +109,15 @@ class Input(ctk.CTkFrame):
         Variable.velocity_start = math.sqrt(u)
 
     def RPM(self):
-        dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
-        Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
-        # omega = 2*Variable.velocity_start / (63*0.001) 
-        # Variable.rpm = '%.2f' %(omega*60/(2*math.pi))
+        #dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
+        #Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
+        omega = 2*Variable.velocity_start / (63*0.001) 
+        Variable.rpm = '%.2f' %(omega*60/(2*math.pi))
 
     def Moter_voltage(self):
-        Variable.voltage = 24 * Variable.rpm / 4000
+        dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
+        rpm = math.ceil(dutyCycle / 100 * 4000)
+        Variable.voltage = 24 * rpm / 4000
         # V_timport = (int(self.entry_y.get()) - 85) * (2.73 - 2.59) / (305 - 85) + 2.59
         # Variable.voltage = '%.3f' %V_timport
     
@@ -123,9 +132,12 @@ class Input(ctk.CTkFrame):
         Variable.velocity_start = 0
         Variable.rpm = 0
         Variable.voltage = 0
+        self.camvas_frame.updeted_canvas()
         
-    def __init__(self, parent):
+    def __init__(self, parent, canvas_frame):
         super().__init__(parent, width = 425, height = 300, bg_color = '#2B2B2B')
+
+        self.camvas_frame = canvas_frame
 
         # Create label and text box widgets
         self.label_x = ctk.CTkLabel(self, text="Target Position x : ", font = ('Arial', 20))

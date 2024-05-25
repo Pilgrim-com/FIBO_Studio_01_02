@@ -92,7 +92,7 @@ class Simulation(Frame):
         self.projectiles = []
 
         # Create the static elements
-        self.target =  Rectangle(760, 263 + 30 - 9.75, 10, 19.5, Variable.GREEN)
+        self.target =  Rectangle(760, 263 - (Variable.position_y) - 9.75, 10, (Variable.position_y * 0.1 * 0.3) + 9.75, Variable.GREEN)
         self.wall = Rectangle(460, 310, 10, 180, Variable.BLACK)
         self.base = Rectangle(760, 263, 10, 227, Variable.BLACK)
         self.floor = Rectangle(40, 490, 730, 10, Variable.BLACK)
