@@ -5,12 +5,12 @@ from pygame.locals import *
 import customtkinter as ctk
 from customtkinter import *
 from tkinter import *
-from more import Variable, Title
+from more import Variable, Title, next_page, back_page
 import math
 
 
 class Page3(ctk.CTkFrame):
-    def __init__(self, parent, size, next_page, back_page):
+    def __init__(self, parent, size):
         super().__init__(parent, width=size[0], height=size[1], bg_color='#2B2B2B')
 
         # Define grid
@@ -30,7 +30,7 @@ class Page3(ctk.CTkFrame):
         self.simulation_frame.grid(row=1, column=0, columnspan=3)
 
         # Button Frame
-        self.back_frame = Button(self, next_page, back_page, self.shoot_projectile)
+        self.back_frame = Button(self, self.shoot_projectile)
         self.back_frame.grid(row=2, column=0, sticky='s', columnspan=3)
 
     def shoot_projectile(self):
@@ -160,12 +160,10 @@ class Simulation(Frame):
         self.after(10, self.update_pygame)
 
 class Button(Frame):
-    def restart(self):
-        self.next_page
-
-    def __init__(self, parent, next_page, back_page, projectile):
+    def __init__(self, parent, projectile):
         super().__init__(parent, bg='#2B2B2B')
-        self.next_page = next_page
+        next = next_page()
+        back = back_page()
         # Button
         self.button_sim = ctk.CTkButton(self,
                                         text='Simulation',
@@ -184,7 +182,7 @@ class Button(Frame):
                                             hover_color="#506988",
                                             text_color='black',
                                             corner_radius=10,
-                                            command=next_page)
+                                            command=next)
         self.button_back = ctk.CTkButton(self,
                                          text='Back',
                                          width=25, height=30,
@@ -193,7 +191,7 @@ class Button(Frame):
                                          hover_color="#506988",
                                          text_color='black',
                                          corner_radius=10,
-                                         command=back_page)
+                                         command=back)
 
         # Layout
         self.button_sim.pack(side='right', padx=10, pady=10)

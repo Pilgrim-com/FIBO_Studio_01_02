@@ -2,11 +2,11 @@ import math
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import Canvas as TkCanvas
-from more import Variable, Title
+from more import Variable, Title, next_page, back_page
 
 
 class Page2(ctk.CTkFrame):
-    def __init__(self, parent, size, next_page, back_page):
+    def __init__(self, parent, size):
         super().__init__(parent, width=size[0], height=size[1], bg_color='#2C2C2C')
 
         # Define grid
@@ -25,12 +25,12 @@ class Page2(ctk.CTkFrame):
         self.canvas_frame = Canvas(self)
         self.canvas_frame.grid(row=1, column=0, sticky='e')
 
-        # Input
+        # Result
         self.result_frame = Result(self, self.canvas_frame)
         self.result_frame.grid(row=1, column=2, sticky='w')
 
         # Back
-        self.back_frame = Button(self, next_page, back_page)
+        self.back_frame = Button(self)
         self.back_frame.grid(row=2, column=0, sticky='s', columnspan=3)
 
 
@@ -146,12 +146,14 @@ class Result(ctk.CTkFrame):
 
 
 class Button(tk.Frame):
-    def __init__(self, parent, next_page, back_page):
+    def __init__(self, parent):
         super().__init__(parent, bg='#2B2B2B')
 
+        next = next_page()
+        back = back_page()
         self.button_sim = ctk.CTkButton(self, text='Next', width=25, height=30, font=('Arial', 16), fg_color='#99B4DA',
-                                        hover_color="#506988", text_color='black', corner_radius=10, command=next_page)
+                                        hover_color="#506988", text_color='black', corner_radius=10, command=next)
         self.button_back = ctk.CTkButton(self, text='Back', width=25, height=30, font=('Arial', 16), fg_color='#99B4DA',
-                                         hover_color="#506988", text_color='black', corner_radius=10, command=back_page)
+                                         hover_color="#506988", text_color='black', corner_radius=10, command=back)
         self.button_sim.pack(side='right', padx=(7, 0), pady=(0, 10))
         self.button_back.pack(side='right', padx=(0, 7), pady=(0, 10))

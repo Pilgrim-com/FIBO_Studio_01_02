@@ -2,11 +2,12 @@ import math
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import *
-from more import Variable, Title
+from tkinter import messagebox
+from more import Variable, Title, next_page
 
 
 class Page1(ctk.CTkFrame):
-    def __init__(self, parent, size, next_page):
+    def __init__(self, parent, size):
         super().__init__(parent, width = size[0], height = size[1], bg_color = '#2C2C2C')
 
         # Define grid
@@ -30,7 +31,7 @@ class Page1(ctk.CTkFrame):
         self.input_frame.grid(row = 1, column = 2, sticky='w')
 
         # Back
-        self.back_frame = Button(self, next_page)
+        self.back_frame = Button(self)
         self.back_frame.grid(row = 2, column = 0, sticky='s', columnspan = 3)
 
 class Canvas(ctk.CTkFrame):
@@ -85,17 +86,18 @@ class Canvas(ctk.CTkFrame):
 
 class Input(ctk.CTkFrame):
     def Calculate(self):
-
-        self.Position()
-        self.Velocity()
-        self.RPM()
-        self.Moter_voltage()
-    
-    def Position(self):
         x = int(self.entry_x.get())
         Variable.position_y = int(self.entry_y.get())
         Variable.position_x = x - 125
-
+        
+        print(Variable.position_x, Variable.position_y)
+        if (Variable.position_x + 125 < 150 or Variable.position_x + 125 > 350) or (Variable.position_y < 83 or Variable.position_y > 305):
+            messagebox.showerror("Error", 'Please enter the correct value of targrt position x and y')
+        else:
+            self.Velocity()
+            self.RPM()
+            self.Moter_voltage()
+            
     def Velocity(self):
         g = 9.81
         h = 0.755 + (Variable.position_y * 0.001)
@@ -162,10 +164,11 @@ class Input(ctk.CTkFrame):
         self.Re_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="w")
         self.Add_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="e")
 
-class Button(Frame):
-    def __init__(self, parent, next_page):
+class Button(Frame):    
+    def __init__(self, parent):
         super().__init__(parent, bg = '#2B2B2B')
-
+        
+        next = next_page()
         self.button = ctk.CTkButton(self,
                                     text = 'Next',
                                     width = 25, height = 30,
@@ -174,5 +177,5 @@ class Button(Frame):
                                     hover_color = "#506988",
                                     text_color = 'black',
                                     corner_radius = 10,
-                                    command = next_page)
+                                    command = next)
         self.button.pack(side = 'bottom', pady = (0, 10))
