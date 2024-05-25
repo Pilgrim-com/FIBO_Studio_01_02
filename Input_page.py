@@ -36,9 +36,6 @@ class Page1(ctk.CTkFrame):
 
 class Canvas(ctk.CTkFrame):
     def draw_triangle(self, canvas):
-        # Clear canvas
-        canvas.delete("all")
-
         # Define coordinates for the triangle
         x0, y0 = 50, 314.4  # Left point
         x1, y1 = 350, 314.4  # Right point

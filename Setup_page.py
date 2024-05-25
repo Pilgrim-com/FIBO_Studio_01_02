@@ -48,15 +48,15 @@ class Canvas(ctk.CTkFrame):
         self.canvas.pack()
 
     def draw_rectangle(self):
-        # Define coordinates for the background
+        # Declare coordinates for the background
         x0, y0 = 0, 0
         x1, y1 = 405, 365
 
-        # Define coordinates for the field
+        # Declare coordinates for the field
         x2, y2 = 30, 30
         x3, y3 = 370, 337
 
-        # Define coordinates for the launcher
+        # Declare coordinates for the launcher
         x4, y4 = 30 + (Variable.position_x * 0.68), 30
         x5, y5 = 30 + 170 + (Variable.position_x * 0.68), 337
 
@@ -68,11 +68,11 @@ class Canvas(ctk.CTkFrame):
         self.canvas.create_text((170 / 2) + (Variable.position_x * 0.68) + 30, y5 / 2 , text='Launcher', font=('Arial', 16), fill="black", anchor='center')
     
     def draw_line(self):
-        # Define coordinates for the line y
+        # Declare coordinates for the line y
         x_coords = [64, 98, 132, 166, 200, 234, 268, 302, 336, 370]
         x_y0, x_y1 = 30, 337
 
-        # Define coordinates for the line x
+        # Declare coordinates for the line x
         y_coords = [60.7, 91.4, 122.1, 152.8, 183.5, 214.2, 244.9, 275.6, 306.3, 337]
         y_x0, y_x1 = 30, 370
 
@@ -92,7 +92,6 @@ class Canvas(ctk.CTkFrame):
             self.canvas.create_text(50 + (Variable.position_x * 0.68), 20, text = Variable.position_x, font=('Arial', 14), fill="black", anchor='center')
 
     def update_canvas(self):
-        # Example: Redraw the rectangle with new coordinates or properties
         self.canvas.delete("all")  # Clear the canvas
         self.draw_rectangle()
 

@@ -37,7 +37,6 @@ class Page3(ctk.CTkFrame):
         # Shoot a projectile from the left side of the screen towards the right
         self.simulation_frame.add_projectile()
 
-# Define projectile class
 class Projectile(pygame.sprite.Sprite):
     def __init__(self, u, theta):
         super().__init__()
@@ -74,7 +73,6 @@ class Projectile(pygame.sprite.Sprite):
         for pos in self.path[:-1:2]:
             pygame.draw.circle(self.screen, Variable.GREEN, (int(pos[0]), int(pos[1])), 1)
 
-# Define your rectangle class
 class Rectangle:
     def __init__(self, x, y, width, height, color):
         self.x = x
