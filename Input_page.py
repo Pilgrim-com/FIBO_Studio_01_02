@@ -30,19 +30,26 @@ class Page1(ctk.CTkFrame):
         self.input_frame = Input(self, canvas_frame = self.canvas_frame)
         self.input_frame.grid(row = 1, column = 2, sticky='w')
 
-        # Back
+        # Button
         self.back_frame = Button(self)
         self.back_frame.grid(row = 2, column = 0, sticky='s', columnspan = 3)
 
 class Canvas(ctk.CTkFrame):
-    def updeted_canvas(self):
-        self.canvas.delete("all")
+    def __init__(self, parent):
+        super().__init__(parent, width = 425, height = 300, bg_color = '#2C2C2C')
+        
+        # Create and place canvas for triangle
+        self.canvas = tk.Canvas(self, width=400, height=364.4, bg = '#FFFFFF')
+
+        # Draw on canvas
         self.draw_triangle(self.canvas)
-        self.draw_circle(self.canvas)
         self.draw_line(self.canvas)
 
+        # Layout
+        self.canvas.pack()
+
     def draw_triangle(self, canvas):
-        # Define coordinates for the triangle
+        # Declare coordinates for the triangle
         x0, y0 = 50, 314.4  # Left point
         x1, y1 = 350, 314.4  # Right point
         x2, y2 = 200, 50  # Top point
@@ -74,20 +81,52 @@ class Canvas(ctk.CTkFrame):
         self.canvas.create_text( 50 + ((Variable.position_x + 20) * 0.6), 10, text = 'y', font = ('Arial', 20), fill = "#A4574F")
         self.canvas.create_text( (50 + (Variable.position_x * 0.6)) + 55, (314.4 + 40) , text = f"({Variable.position_x}, {Variable.position_y})", font = ('Arial', 16), fill = "black")
 
-    def __init__(self, parent):
-        super().__init__(parent, width = 425, height = 300, bg_color = '#2C2C2C')
-        
-        # Create and place canvas for triangle
-        self.canvas = tk.Canvas(self, width=400, height=364.4, bg = '#FFFFFF')
-
-        # Draw on canvas
+    def updeted_canvas(self):
+        self.canvas.delete("all")
         self.draw_triangle(self.canvas)
+        self.draw_circle(self.canvas)
         self.draw_line(self.canvas)
 
-        # Layout
-        self.canvas.pack()
-
 class Input(ctk.CTkFrame):
+    def __init__(self, parent, canvas_frame):
+        super().__init__(parent, width = 425, height = 300, bg_color = '#2B2B2B')
+
+        self.camvas_frame = canvas_frame
+
+        # Create label and text box widgets
+        self.label_x = ctk.CTkLabel(self, text="Target Position x : ", font = ('Arial', 20))
+        self.label_y = ctk.CTkLabel(self, text="Target Position y : ", font = ('Arial', 20))
+        
+        # Create entry and button widgets
+        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 350 (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position 83 - 305 (mm)', width = 210, height = 30, corner_radius = 10)
+
+        #Button
+        self.Add_button = ctk.CTkButton(self,
+                                        text="Add position",
+                                        width = 10, height = 10,
+                                        font = ('Arial', 12),
+                                        fg_color = '#99B4DA',
+                                        hover_color = "#506988",
+                                        text_color = 'black',
+                                        command = self.Calculate)
+        self.Re_button = ctk.CTkButton(self,
+                                        text="Reset position",
+                                        width = 10, height = 10,
+                                        font = ('Arial', 12),
+                                        fg_color = '#99B4DA',
+                                        hover_color = "#506988",
+                                        text_color = 'black',
+                                        command = self.delete)
+        
+        # Place label, text box, entry, button, and another text widgets using grid layout
+        self.label_x.grid(row=0, column=0, padx=20, pady = (20,0), sticky="w")
+        self.entry_x.grid(row=1, column=0, padx=20, pady=(5, 15), sticky="w")
+        self.label_y.grid(row=2, column=0, padx=20, sticky="w")
+        self.entry_y.grid(row=3, column=0, padx=20, pady=5, sticky="w")
+        self.Re_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="w")
+        self.Add_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="e")
+
     def Calculate(self):
         x = int(self.entry_x.get())
         Variable.position_y = int(self.entry_y.get())
@@ -133,45 +172,6 @@ class Input(ctk.CTkFrame):
         Variable.rpm = 0
         Variable.voltage = 0
         self.camvas_frame.updeted_canvas()
-        
-    def __init__(self, parent, canvas_frame):
-        super().__init__(parent, width = 425, height = 300, bg_color = '#2B2B2B')
-
-        self.camvas_frame = canvas_frame
-
-        # Create label and text box widgets
-        self.label_x = ctk.CTkLabel(self, text="Target Position x : ", font = ('Arial', 20))
-        self.label_y = ctk.CTkLabel(self, text="Target Position y : ", font = ('Arial', 20))
-        
-        # Create entry and button widgets
-        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 350 (mm)', width = 210, height = 30, corner_radius = 10)
-        self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position 83 - 305 (mm)', width = 210, height = 30, corner_radius = 10)
-
-        #Button
-        self.Add_button = ctk.CTkButton(self,
-                                        text="Add position",
-                                        width = 10, height = 10,
-                                        font = ('Arial', 12),
-                                        fg_color = '#99B4DA',
-                                        hover_color = "#506988",
-                                        text_color = 'black',
-                                        command = self.Calculate)
-        self.Re_button = ctk.CTkButton(self,
-                                        text="Reset position",
-                                        width = 10, height = 10,
-                                        font = ('Arial', 12),
-                                        fg_color = '#99B4DA',
-                                        hover_color = "#506988",
-                                        text_color = 'black',
-                                        command = self.delete)
-        
-        # Place label, text box, entry, button, and another text widgets using grid layout
-        self.label_x.grid(row=0, column=0, padx=20, pady = (20,0), sticky="w")
-        self.entry_x.grid(row=1, column=0, padx=20, pady=(5, 15), sticky="w")
-        self.label_y.grid(row=2, column=0, padx=20, sticky="w")
-        self.entry_y.grid(row=3, column=0, padx=20, pady=5, sticky="w")
-        self.Re_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="w")
-        self.Add_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="e")
 
 class Button(Frame):    
     def __init__(self, parent):

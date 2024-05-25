@@ -29,7 +29,7 @@ class Page2(ctk.CTkFrame):
         self.result_frame = Result(self, self.canvas_frame)
         self.result_frame.grid(row=1, column=2, sticky='w')
 
-        # Back
+        # Button
         self.button_frame = Button(self)
         self.button_frame.grid(row=2, column=0, sticky='s', columnspan=3)
 
@@ -49,8 +49,8 @@ class Canvas(ctk.CTkFrame):
 
     def draw_rectangle(self):
         # Declare coordinates for the background
-        x0, y0 = 0, 0
-        x1, y1 = 405, 365
+        x0, y0 = 0, 0 # Top left
+        x1, y1 = 405, 365 # Bottom right
 
         # Declare coordinates for the field
         x2, y2 = 30, 30
@@ -84,8 +84,9 @@ class Canvas(ctk.CTkFrame):
         for y in y_coords:
             self.canvas.create_line(y_x0, y, y_x1, y, fill='black', width=1)
 
-        if Variable.position_x ==0:
+        if Variable.position_x == 0:
             self.canvas.create_text(202.5 + (Variable.position_x * 0.68), 15, text = "ตั้งเครื่องมุมซ้ายของสนาม", font=('Arial', 16), fill="black", anchor='center')
+
         if Variable.position_x != 0:
             # Draw range of position launcher change
             self.canvas.create_line(30, 15, 30, 25, fill='black', width=1.5)
@@ -96,7 +97,6 @@ class Canvas(ctk.CTkFrame):
     def update_canvas(self):
         self.canvas.delete("all")  # Clear the canvas
         self.draw_rectangle()
-
 
 class Result(ctk.CTkFrame):
     def __init__(self, parent, canvas_frame):
@@ -148,9 +148,9 @@ class Button(tk.Frame):
 
         next = next_page()
         back = back_page()
-        self.button_sim = ctk.CTkButton(self, text='Next', width=25, height=30, font=('Arial', 16), fg_color='#99B4DA',
+        self.button_next = ctk.CTkButton(self, text='Next', width=25, height=30, font=('Arial', 16), fg_color='#99B4DA',
                                         hover_color="#506988", text_color='black', corner_radius=10, command=next)
         self.button_back = ctk.CTkButton(self, text='Back', width=25, height=30, font=('Arial', 16), fg_color='#99B4DA',
                                          hover_color="#506988", text_color='black', corner_radius=10, command=back)
-        self.button_sim.pack(side='right', padx=(7, 0), pady=(0, 10))
+        self.button_next.pack(side='right', padx=(7, 0), pady=(0, 10))
         self.button_back.pack(side='right', padx=(0, 7), pady=(0, 10))

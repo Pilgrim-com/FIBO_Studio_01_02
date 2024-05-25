@@ -13,7 +13,7 @@ class Main_App(ctk.CTk):
         ctk.set_appearance_mode("dark") # Modes: 'light' (standart), 'dark'
 
         self.title(title)
-        self.geometry(f'{size[0]}x{size[1]}')
+        self.geometry(f'{size[0]}x{size[1]}') #width x height
         self.resizable(False, False)
         
         page1 = Page1(self, size)
@@ -25,4 +25,4 @@ class Main_App(ctk.CTk):
 
 # Create and run the app
 app = Main_App('Simulation', (850, 600))
-app.mainloop()
+app.mainloop() #In Tkinter, The mainloop() is an infinite loop used to run the application, wait for an event to occur and process the event till the window is not closed.
