@@ -56,10 +56,6 @@ class Canvas(ctk.CTkFrame):
         x2, y2 = 30, 30
         x3, y3 = 370, 337
 
-        # Declare coordinates for the launcher
-        x4, y4 = 30 + (Variable.position_x * 0.68), 30
-        x5, y5 = 30 + 170 + (Variable.position_x * 0.68), 337
-
         # Draw a filled rectangle (x1, y1, x2, y2)
         self.canvas.create_rectangle(x0, y0, x1, y1, fill="white")
         self.canvas.create_rectangle(x2, y2, x3, y3, fill="#99B4DA", outline="black", width=1)
@@ -69,11 +65,12 @@ class Canvas(ctk.CTkFrame):
     def add_image(self):
         # Load image
         image = Image.open("Top_view.png")
-        image = image.resize((170, 307))
+        weight, height = 170, 307 # weight = 170 --> launcher size x axis 250 * 0.68, height = 307 --> launcher size y axis 400 * 07675
+        image = image.resize((weight, height))
         image = ImageTk.PhotoImage(image)
 
         # Add image to canvas
-        self.canvas.create_image((170 / 2) + (Variable.position_x * 0.68) + 30, 183.5, image=image)
+        self.canvas.create_image((weight / 2) + (Variable.position_x * 0.68) + 30, 183.5, image=image)
         self.canvas.image = image
 
     def draw_line(self):
@@ -135,9 +132,9 @@ class Result(ctk.CTkFrame):
         # Declare variable
         Variable.position_x = Variable.position_x - 125
         
-        self.text_rpm = ctk.CTkEntry(self, placeholder_text = Variable.rpm, placeholder_text_color='white', width=210, height=30,
+        self.text_rpm = ctk.CTkEntry(self, placeholder_text = f"{Variable.rpm} rpm", placeholder_text_color='white', width=210, height=30,
                                      corner_radius=10)
-        self.text_voltage = ctk.CTkEntry(self, placeholder_text = Variable.voltage, placeholder_text_color='white', width=210, height=30,
+        self.text_voltage = ctk.CTkEntry(self, placeholder_text = f"{Variable.voltage} V", placeholder_text_color='white', width=210, height=30,
                                          corner_radius=10)
         
         # New layout

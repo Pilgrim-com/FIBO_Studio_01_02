@@ -144,20 +144,20 @@ class Input(ctk.CTkFrame):
             
     def Velocity(self):
         g = 9.81
-        h = 0.755 + (Variable.position_y * 0.001)
-        u = (4*(-g))/(h-2)
+        h = 0.755 + (Variable.position_y * 0.001) # ระยะในแกน y
+        u = (4*(-g))/(h-2) # คำนวณความเร็วต้นของลูกสควอชจากสูตร projectile
         Variable.velocity_start = math.sqrt(u)
 
     def RPM(self):
         #dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
         #Variable.rpm = math.ceil(dutyCycle / 100 * 4000)
-        omega = 2*Variable.velocity_start / (63*0.001) 
-        Variable.rpm = '%.2f' %(omega*60/(2*math.pi))
+        omega = 2*Variable.velocity_start / (63*0.001) # หาความเร็วเชิงมุม รัศมีของล้อคือ 63 mm
+        Variable.rpm = '%.2f' %(omega*60/(2*math.pi)) # แปลงเป็น rpm
 
     def Moter_voltage(self):
-        dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49
-        rpm = math.ceil(dutyCycle / 100 * 4000)
-        Variable.voltage = 24 * rpm / 4000
+        dutyCycle = (int(self.entry_y.get()) - 85) * (53 - 49) / (305 - 85) + 49 # เทียบค่า dtc กับระยะแกน y
+        rpm = math.ceil(dutyCycle / 100 * 4000) # หา rpm จาก dtc
+        Variable.voltage = 24 * rpm / 4000 # เทียบบัญญัติไตรยางค์หา voltage
         # V_timport = (int(self.entry_y.get()) - 85) * (2.73 - 2.59) / (305 - 85) + 2.59
         # Variable.voltage = '%.3f' %V_timport
     
