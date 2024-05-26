@@ -59,27 +59,27 @@ class Canvas(ctk.CTkFrame):
 
     def draw_circle(self, canvas):
         # Define coordinate for the circle centered at (200, 182.2) with a radius of 50
-        x0, y0 = 25 + (Variable.position_x * 0.6), 289.4 - (Variable.position_y * 0.661)
-        x1, y1 = 75 + (Variable.position_x * 0.6), 339.4 - (Variable.position_y * 0.661)
+        x0, y0 = 14.9 + (Variable.position_x * 0.54), 279.3 - (Variable.position_y * 0.545)
+        x1, y1 = 85.1 + (Variable.position_x * 0.54), 349.5 - (Variable.position_y * 0.545)
 
         # Draw circle
         canvas.create_oval(x0, y0, x1, y1, fill = 'white') 
 
     def draw_line(self, canvas):
         # Define coordinates for the line x
-        x_x0, x_y0 = 0, 314.4 - (Variable.position_y * 0.661)
-        x_x1, x_y1 = 400, 314.4 - (Variable.position_y * 0.661)
+        x_x0, x_y0 = 0, 314.4 - (Variable.position_y * 0.545)
+        x_x1, x_y1 = 400, 314.4 - (Variable.position_y * 0.545)
 
         # Define coordinates for the line y
-        y_x0, y_y0 = 50 + (Variable.position_x * 0.6), 0
-        y_x1, y_y1 = 50 + (Variable.position_x * 0.6), 364.4 
+        y_x0, y_y0 = 50 + (Variable.position_x * 0.54), 0
+        y_x1, y_y1 = 50 + (Variable.position_x * 0.54), 364.4 
 
         # Draw line
         canvas.create_line(x_x0, x_y0, x_x1, x_y1, width = 3, fill="#96A5C3")
         canvas.create_line(y_x0, y_y0, y_x1, y_y1, width = 3, fill="#A4574F")
-        self.canvas.create_text( 393, (314.4 - 15) - ((Variable.position_y) * 0.661), text = 'x', font = ('Arial', 20), fill = "#96A5C3")
-        self.canvas.create_text( 50 + ((Variable.position_x + 20) * 0.6), 10, text = 'y', font = ('Arial', 20), fill = "#A4574F")
-        self.canvas.create_text( (50 + (Variable.position_x * 0.6)) + 55, (314.4 + 40) , text = f"({Variable.position_x}, {Variable.position_y})", font = ('Arial', 16), fill = "black")
+        self.canvas.create_text( 393, (314.4 - 15) - ((Variable.position_y) * 0.545), text = 'x', font = ('Arial', 20), fill = "#96A5C3")
+        self.canvas.create_text( 50 + ((Variable.position_x + 20) * 0.54), 10, text = 'y', font = ('Arial', 20), fill = "#A4574F")
+        self.canvas.create_text( (50 + (Variable.position_x * 0.54)) + 55, (314.4 + 40) , text = f"({Variable.position_x}, {Variable.position_y})", font = ('Arial', 16), fill = "black")
 
     def updeted_canvas(self):
         self.canvas.delete("all")
@@ -98,7 +98,7 @@ class Input(ctk.CTkFrame):
         self.label_y = ctk.CTkLabel(self, text="Target Position y : ", font = ('Arial', 20))
         
         # Create entry and button widgets
-        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 350 (mm)', width = 210, height = 30, corner_radius = 10)
+        self.entry_x = ctk.CTkEntry(self, placeholder_text = 'Enter x position 150 - 390 (mm)', width = 210, height = 30, corner_radius = 10)
         self.entry_y = ctk.CTkEntry(self, placeholder_text = 'Enter y position 83 - 305 (mm)', width = 210, height = 30, corner_radius = 10)
 
         #Button
@@ -133,7 +133,7 @@ class Input(ctk.CTkFrame):
         Variable.position_x = x
         
         print(Variable.position_x, Variable.position_y)
-        if (Variable.position_x < 150 or Variable.position_x > 350) or (Variable.position_y < 83 or Variable.position_y > 305):
+        if (Variable.position_x < 150 or Variable.position_x > 390) or (Variable.position_y < 83 or Variable.position_y > 305):
             messagebox.showerror("Error", 'Please enter the correct value of targrt position x and y')
         else:
             self.camvas_frame.updeted_canvas()
@@ -177,7 +177,7 @@ class Button(Frame):
     def __init__(self, parent):
         super().__init__(parent, bg = '#2B2B2B')
         
-        next = next_page()
+        self.next = next_page()
         self.button = ctk.CTkButton(self,
                                     text = 'Next',
                                     width = 25, height = 30,
@@ -186,5 +186,12 @@ class Button(Frame):
                                     hover_color = "#506988",
                                     text_color = 'black',
                                     corner_radius = 10,
-                                    command = next)
+                                    command = self.check_value)
         self.button.pack(side = 'bottom', pady = (0, 10))
+
+    def check_value(self):
+        if (Variable.position_x < 150 or Variable.position_x > 390) or (Variable.position_y < 83 or Variable.position_y > 305):
+            messagebox.showerror("Error", 'Please enter the correct value of targrt position x and y')
+        else:
+            next = next_page()
+            next()
