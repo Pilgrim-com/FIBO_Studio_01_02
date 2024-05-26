@@ -64,10 +64,18 @@ class Canvas(ctk.CTkFrame):
         self.canvas.create_rectangle(x0, y0, x1, y1, fill="white")
         self.canvas.create_rectangle(x2, y2, x3, y3, fill="#99B4DA", outline="black", width=1)
         self.draw_line()
-        self.canvas.create_rectangle(x4, y4, x5, y5, fill="#506988", outline="black", width=2)
-        self.canvas.create_text((170 / 2) + (Variable.position_x * 0.68) + 30, y5 / 2 , text='Launcher', font=('Arial', 16), fill="black", anchor='center')
+        self.add_image()
 
-    
+    def add_image(self):
+        # Load image
+        image = Image.open("Top_view.png")
+        image = image.resize((170, 307))
+        image = ImageTk.PhotoImage(image)
+
+        # Add image to canvas
+        self.canvas.create_image((170 / 2) + (Variable.position_x * 0.68) + 30, 183.5, image=image)
+        self.canvas.image = image
+
     def draw_line(self):
         # Declare coordinates for the line y
         x_coords = [64, 98, 132, 166, 200, 234, 268, 302, 336, 370]
