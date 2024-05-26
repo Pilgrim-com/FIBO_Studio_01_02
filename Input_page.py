@@ -84,7 +84,8 @@ class Canvas(ctk.CTkFrame):
     def updeted_canvas(self):
         self.canvas.delete("all")
         self.draw_triangle(self.canvas)
-        self.draw_circle(self.canvas)
+        if Variable.position_x != 0 and Variable.position_y != 0:
+            self.draw_circle(self.canvas)
         self.draw_line(self.canvas)
 
 class Input(ctk.CTkFrame):
