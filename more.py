@@ -10,11 +10,12 @@ class Variable:
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     GREEN = (0, 255, 0)
-    ORIGIN = (160, 400)
+    RED = (255, 0, 0)
+    ORIGIN = (130, 400)
     G = 9.81
     current_page = 0
     pages = []
-
+    
 class Title(Frame):
     def __init__(self, parent, title):
         super().__init__(parent, bg = '#2C2C2C')

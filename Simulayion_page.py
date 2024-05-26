@@ -91,8 +91,15 @@ class Simulation(Frame):
         self.init_pygame()
         self.projectiles = []
 
+        # Load the image
+        self.image = pygame.image.load('Side_view.png')
+        # Resize the image
+        new_size = (120, 90)  # Width, height
+        self.resized_image = pygame.transform.scale(self.image, new_size)
+
         # Create the static elements
-        self.target =  Rectangle(760, 263 - (Variable.position_y) - 9.75, 10, (Variable.position_y * 0.1 * 0.3) + 9.75, Variable.GREEN)
+        self.target =  Rectangle(760, 263 - (Variable.position_y * 0.1 * 3) - 9.75, 10, 19.5, Variable.GREEN)
+        self.target2 =  Rectangle(760, 263 - 145.5, 10, 145.5, Variable.RED)
         self.wall = Rectangle(460, 310, 10, 180, Variable.BLACK)
         self.base = Rectangle(760, 263, 10, 227, Variable.BLACK)
         self.floor = Rectangle(40, 490, 730, 10, Variable.BLACK)
@@ -104,6 +111,7 @@ class Simulation(Frame):
         os.environ['SDL_WINDOWID'] = str(self.winfo_id())
         os.environ['SDL_VIDEODRIVER'] = 'windib'
         pygame.init()
+        pygame.font.init()
         
         self.screen = pygame.display.set_mode((self.winfo_width(), self.winfo_height()))
         self.clock = pygame.time.Clock()
@@ -141,16 +149,27 @@ class Simulation(Frame):
             projectile.update()
 
         # Draw static elements
-        self.target.draw(self.screen)
         self.wall.draw(self.screen)
         self.base.draw(self.screen)
         self.floor.draw(self.screen)
+        self.target2.draw(self.screen)
+        self.target.draw(self.screen)
 
         # Draw additional static graphics
-        """ pygame.draw.line(self.screen, BLACK, ORIGIN, (ORIGIN[0] + 100, ORIGIN[1]), 2)
-        pygame.draw.line(self.screen, BLACK, ORIGIN, (ORIGIN[0], ORIGIN[1] - 100), 2)
-        pygame.draw.circle(self.screen, BLACK, ORIGIN, 2) """
-        pygame.draw.polygon(self.screen, Variable.BLACK, [(40, 490), (160, 490), (160, 400)])
+        # pygame.draw.line(self.screen, BLACK, ORIGIN, (ORIGIN[0] + 100, ORIGIN[1]), 2)
+        # pygame.draw.line(self.screen, BLACK, ORIGIN, (ORIGIN[0], ORIGIN[1] - 100), 2)
+        # pygame.draw.circle(self.screen, BLACK, ORIGIN, 2)
+        # pygame.draw.polygon(self.screen, Variable.BLACK, [(40, 490), (160, 490), (160, 400)])
+
+        # Blit the image onto the screen at position (x, y)
+        self.screen.blit(self.resized_image, (40, 400))
+
+        font = pygame.font.SysFont('Arial', 30)
+        # Render text to a surface
+        wall = font.render('Wall', True, Variable.BLACK)
+        target = font.render('Target', True, Variable.BLACK)
+        self.screen.blit(wall, (440, 505))
+        self.screen.blit(target, (740, 505))
 
         pygame.display.update()
 

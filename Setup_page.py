@@ -3,7 +3,7 @@ import tkinter as tk
 import customtkinter as ctk
 from tkinter import Canvas as TkCanvas
 from more import Variable, Title, next_page, back_page
-
+from PIL import Image, ImageTk
 
 class Page2(ctk.CTkFrame):
     def __init__(self, parent, size):
@@ -66,6 +66,7 @@ class Canvas(ctk.CTkFrame):
         self.draw_line()
         self.canvas.create_rectangle(x4, y4, x5, y5, fill="#506988", outline="black", width=2)
         self.canvas.create_text((170 / 2) + (Variable.position_x * 0.68) + 30, y5 / 2 , text='Launcher', font=('Arial', 16), fill="black", anchor='center')
+
     
     def draw_line(self):
         # Declare coordinates for the line y
