@@ -46,25 +46,25 @@ class Projectile(pygame.sprite.Sprite):
         self.color = Variable.BLACK
 
         # Calculate initial horizontal and vertical components of velocity
-        self.vx = self.u * math.cos(self.theta)
-        self.vy = -self.u * math.sin(self.theta)
-        self.time = 0
+        self.vx = self.u * math.cos(self.theta) # ux = ucos
+        self.vy = -self.u * math.sin(self.theta) # uy = usin
+        self.time = 0 
         self.dt = 0.1 # Time step
 
-        self.range_ = 765
+        self.range_ = 765 # ระยะแกน x
         self.path = []
 
     def update(self):
         self.time += self.dt
-        self.x = Variable.ORIGIN[0] + self.vx * self.time
-        self.y = Variable.ORIGIN[1] + (self.vy * self.time + 0.5 * Variable.G * self.time ** 2)
+        self.x = Variable.ORIGIN[0] + self.vx * self.time # x = x0 + uxt
+        self.y = Variable.ORIGIN[1] + (self.vy * self.time + 0.5 * Variable.G * self.time ** 2) # y = y0 + uyt + 0.5gt^2
 
         if self.x >= self.range_:
             self.vx = 0
             self.vy = 0
 
         # Append new position to path
-        self.path.append((self.x, self.y))
+        self.path.append((self.x, self.y)) # เก็บค่าตำแหน่ง x,y ของลูก
         self.path = self.path[-50:]
 
         # Draw projectile
@@ -121,7 +121,7 @@ class Simulation(Frame):
         self.target =  Rectangle(760, 263 - (Variable.position_y * 0.1 * 3) - 9.75, 10, 19.5, Variable.GREEN)
 
         # Add a projectile at the specified position with initial velocities
-        target_x, target_y = 765, 263 - (Variable.position_y * 0.1 * 3) # max 91.5 = 30.5 * 3
+        target_x, target_y = 765, 263 - (Variable.position_y * 0.1 * 3) 
         dx = target_x - Variable.ORIGIN[0]
         dy = Variable.ORIGIN[1] - target_y
         theta = 45

@@ -81,7 +81,7 @@ class Canvas(ctk.CTkFrame):
         self.canvas.create_text( 50 + ((Variable.position_x + 20) * 0.54), 10, text = 'y', font = ('Arial', 20), fill = "#A4574F")
         self.canvas.create_text( (50 + (Variable.position_x * 0.54)) + 55, (314.4 + 40) , text = f"({Variable.position_x}, {Variable.position_y})", font = ('Arial', 16), fill = "black")
 
-    def updeted_canvas(self):
+    def update_canvas(self):
         self.canvas.delete("all")
         self.draw_triangle(self.canvas)
         if Variable.position_x != 0 and Variable.position_y != 0:
@@ -172,7 +172,7 @@ class Input(ctk.CTkFrame):
         Variable.velocity_start = 0
         Variable.rpm = 0
         Variable.voltage = 0
-        self.camvas_frame.updeted_canvas()
+        self.camvas_frame.update_canvas()
 
 class Button(Frame):    
     def __init__(self, parent):
