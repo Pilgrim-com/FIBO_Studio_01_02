@@ -37,7 +37,6 @@ class Page2(ctk.CTkFrame):
 class Canvas(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent, bg_color='#FFFFFF')
-        
         # Create and place canvas for triangle
         self.canvas = TkCanvas(self, width=400, height=364.4, bg='#2C2C2C')
         
@@ -94,6 +93,7 @@ class Canvas(ctk.CTkFrame):
             self.canvas.create_text(202.5 + (Variable.position_x * 0.68), 15, text = "ตั้งเครื่องมุมซ้ายของสนาม", font=('Arial', 16), fill="black", anchor='center')
 
         if Variable.position_x != 0:
+            Variable.position_x = Variable.position_x - 125
             # Draw range of position launcher change
             self.canvas.create_line(30, 15, 30, 25, fill='black', width=1.5)
             self.canvas.create_line(30 + (Variable.position_x * 0.68), 15, 30 + (Variable.position_x * 0.68), 25, fill='black', width=1.5)
@@ -103,6 +103,7 @@ class Canvas(ctk.CTkFrame):
     def update_canvas(self):
         self.canvas.delete("all")  # Clear the canvas
         self.draw_rectangle()
+        Variable.position_x = Variable.position_x + 125
 
 class Result(ctk.CTkFrame):
     def __init__(self, parent, canvas_frame):
@@ -129,9 +130,9 @@ class Result(ctk.CTkFrame):
         self.Calculate_button.grid(row=4, column=0, padx=20, pady=(10, 20), sticky="w")
 
     def calculate_value(self):
-        # Declare variable
-        Variable.position_x = Variable.position_x - 125
+        # Declare Variable
         
+
         self.text_rpm = ctk.CTkEntry(self, placeholder_text = f"{Variable.rpm} rpm", placeholder_text_color='white', width=210, height=30,
                                      corner_radius=10)
         self.text_voltage = ctk.CTkEntry(self, placeholder_text = f"{Variable.voltage} V", placeholder_text_color='white', width=210, height=30,

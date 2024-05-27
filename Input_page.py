@@ -137,7 +137,7 @@ class Input(ctk.CTkFrame):
         if (Variable.position_x < 150 or Variable.position_x > 390) or (Variable.position_y < 83 or Variable.position_y > 305):
             messagebox.showerror("Error", 'Please enter the correct value of targrt position x and y')
         else:
-            self.camvas_frame.updeted_canvas()
+            self.camvas_frame.update_canvas()
             self.Velocity()
             self.RPM()
             self.Moter_voltage()
