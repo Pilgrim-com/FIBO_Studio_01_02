@@ -144,7 +144,7 @@ class Input(ctk.CTkFrame):
             
     def Velocity(self):
         g = 9.81
-        h = 0.755 + (Variable.position_y * 0.001) # ระยะในแกน y
+        h = 0.755 + (Variable.position_y * 0.001) # ระยะในแกน y ความสูงโต็ะ
         u = (4*(-g))/(h-2) # คำนวณความเร็วต้นของลูกสควอชจากสูตร projectile
         Variable.velocity_start = math.sqrt(u)
 
